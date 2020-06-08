@@ -1,3 +1,3 @@
 # dispersion
 
-Application emulates effect of dispersion.
+Application emulates the effect of dispersion.
