@@ -40,7 +40,9 @@ class _HomePageState extends State<HomePage> {
                   SizedBox(
                       width: 320,
                       height: 320,
-                      child: CustomPaint(painter: MyPainter(angleSliderValue))),
+                      child: CustomPaint(
+                          painter: MyPainter(
+                              angleSliderValue, angleValue, waveValue))),
                   Spacer(),
                   Padding(
                       padding: const EdgeInsets.only(left: 24),
@@ -122,12 +124,44 @@ class _HomePageState extends State<HomePage> {
 }
 
 class MyPainter extends CustomPainter {
-  final sliderValue;
+  final angleSliderValue;
+  final angleValue;
 
-  MyPainter(this.sliderValue);
+  final waveValue;
+
+  MyPainter(this.angleSliderValue, this.angleValue, this.waveValue);
+
+  final mainLine = Paint();
 
   @override
   void paint(Canvas canvas, Size size) {
+    mainLine
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = 3.5
+      ..color = waveValue > 640 || waveValue == 640
+          ? Colors.red
+          : waveValue < 640 && waveValue > 600 || waveValue == 600
+              ? Colors.orange
+              : waveValue < 600 && waveValue > 590 || waveValue == 590
+                  ? Colors.yellow
+                  : waveValue < 590 && waveValue > 485 || waveValue == 485
+                      ? Colors.lightGreen
+                      : waveValue < 485 && waveValue > 465 || waveValue == 465
+                          ? Colors.cyanAccent
+                          : waveValue < 465 && waveValue > 420 ||
+                                  waveValue == 420
+                              ? Colors.blue
+                              : waveValue < 420 && waveValue > 385 ||
+                                      waveValue == 385
+                                  ? Color.fromRGBO(0, 13, 255, 1)
+                                  : waveValue < 385 && waveValue > 370 ||
+                                          waveValue == 370
+                                      ? Color.fromRGBO(82, 0, 255, 1)
+                                      : waveValue < 370 && waveValue > 345 ||
+                                              waveValue == 345
+                                          ? Color.fromRGBO(255, 0, 255, 1)
+                                          : Colors.blue;
+
     drawTriangle(canvas, size);
     drawAngle(canvas, size);
     drawFirstLine(canvas, size);
@@ -135,7 +169,7 @@ class MyPainter extends CustomPainter {
   }
 
   void drawTriangle(Canvas canvas, Size size) {
-    double widthCalcValue = sliderValue * 106;
+    double widthCalcValue = angleSliderValue * 106;
     final rect = Rect.fromLTWH(0.0, 0.0, size.width, size.height);
     final trianglePaint = Paint()..shader = mainGradient.createShader(rect);
     var trianglePath = Path();
@@ -163,14 +197,11 @@ class MyPainter extends CustomPainter {
   }
 
   void drawFirstLine(Canvas canvas, Size size) {
-    double widthCalcValue = sliderValue * 100;
+    double widthCalcValue = angleSliderValue * 100;
     double x1 = size.width / 3 - widthCalcValue;
-    final firstLinePaint = Paint()
-      ..style = PaintingStyle.stroke
-      ..strokeWidth = 3
-      ..color = Colors.red;
+
     canvas.drawLine(Offset(-250, size.height),
-        Offset((x1 + 160) / 2, size.height / 2), firstLinePaint);
+        Offset((x1 + 160) / 2, size.height / 2), mainLine);
   }
 
   void drawFirstPerpendicular(Canvas canvas, Size size) {
@@ -179,7 +210,7 @@ class MyPainter extends CustomPainter {
       ..strokeWidth = 3
       ..color = Colors.white;
 
-    double widthCalcValue = sliderValue * 100;
+    double widthCalcValue = angleSliderValue * 100;
     double x0 = (size.width / 3 - widthCalcValue + 160) / 2;
     double y0 = size.height / 2;
     double xa = size.width / 3 - widthCalcValue;
@@ -201,7 +232,7 @@ class MyPainter extends CustomPainter {
     final angleArc = Path();
     angleArc.moveTo(xAngle, unknownY(xAngle));
     angleArc.arcToPoint(
-        Offset(xAngle, unknownY(xAngle) + 44 - sliderValue * 19),
+        Offset(xAngle, unknownY(xAngle) + 44 - angleSliderValue * 19),
         clockwise: false,
         radius: Radius.circular(30));
     final anglePaint = Paint()
@@ -210,6 +241,19 @@ class MyPainter extends CustomPainter {
       ..color = Colors.yellow;
 
     canvas.drawPath(angleArc, anglePaint);
+
+    final textPainter = TextPainter(
+        text: TextSpan(
+            text: '${firstAngleData[angleValue]}°',
+            style: TextStyle(color: Colors.yellow, fontSize: 27)),
+        textDirection: TextDirection.ltr);
+    textPainter.layout(minWidth: 0, maxWidth: size.width);
+    final offset =
+        Offset(xAngle, unknownY(xAngle) + 44 - angleSliderValue * 19);
+    textPainter.paint(canvas, offset);
+
+
+
   }
 
   @override
