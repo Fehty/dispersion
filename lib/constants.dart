@@ -1,5 +1,11 @@
 import 'package:flutter/material.dart';
 
+TextStyle leftMenuTextStyle = TextStyle(
+    fontSize: 18,
+    fontWeight: FontWeight.w400,
+    color: Colors.white,
+    letterSpacing: -0.3);
+
 LinearGradient mainGradient = LinearGradient(
     begin: Alignment.bottomCenter,
     end: Alignment.topCenter,
@@ -40,4 +46,38 @@ Map firstAngleData = {
   48: 49.95,
   49: 50.56,
   50: 51.34
+};
+
+Map secondAngleData = {
+  20: 4.06,
+  21: 2.78,
+  22: 2.04,
+  23: 0.01,
+  24: 1.09,
+  25: 2.49,
+  26: 4.67,
+  27: 5.23,
+  28: 6.52,
+  29: 7.84,
+  30: 9.46,
+  31: 10.52,
+  32: 11.59,
+  33: 12.67,
+  34: 13.75,
+  35: 14.83,
+  36: 15.92,
+  37: 17.21,
+  38: 18.12,
+  39: 19.23,
+  40: 20.35,
+  41: 21.48,
+  42: 22.61,
+  43: 23.75,
+  44: 24.94,
+  45: 26.61,
+  46: 27.23,
+  47: 28.42,
+  48: 29.61,
+  49: 30.83,
+  50: 32.41
 };
