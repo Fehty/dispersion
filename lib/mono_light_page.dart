@@ -11,7 +11,7 @@ class MonoLightPage extends StatefulWidget {
 
 class _MonoLightPageState extends State<MonoLightPage> {
   double waveSliderValue = 0.0;
-  int waveValue = 350;
+  int waveValue = 380;
 
   double angleSliderValue = 0.0;
   int angleValue = 30;
@@ -21,8 +21,8 @@ class _MonoLightPageState extends State<MonoLightPage> {
     return Scaffold(
       backgroundColor: Colors.black,
       body: SingleChildScrollView(
-            physics: BouncingScrollPhysics(),
-            padding: const EdgeInsets.all(0),
+          physics: BouncingScrollPhysics(),
+          padding: const EdgeInsets.all(0),
             child: SizedBox(
                 width: MediaQuery
                     .of(context)
@@ -122,8 +122,8 @@ class _MonoLightPageState extends State<MonoLightPage> {
                                               setState(() {
                                                 waveSliderValue = value;
                                                 waveValue =
-                                                    (410 * waveSliderValue +
-                                                        350)
+                                                    (380 * waveSliderValue +
+                                                        380)
                                                         .toInt();
                                               });
                                             }))))
@@ -174,28 +174,25 @@ class MyPainter extends CustomPainter {
     mainLinePaint
       ..style = PaintingStyle.stroke
       ..strokeWidth = 3.5
-      ..color = waveValue > 640 || waveValue == 640
+      ..color = waveValue > 625 || waveValue == 625
           ? Colors.red
-          : waveValue < 640 && waveValue > 600 || waveValue == 600
+          : waveValue < 625 && waveValue > 590 || waveValue == 590
           ? Colors.orange
-              : waveValue < 600 && waveValue > 590 || waveValue == 590
-                  ? Colors.yellow
-                  : waveValue < 590 && waveValue > 485 || waveValue == 485
-                      ? Colors.lightGreen
-                      : waveValue < 485 && waveValue > 465 || waveValue == 465
-                          ? Colors.cyanAccent
-                          : waveValue < 465 && waveValue > 420 ||
-                                  waveValue == 420
-                              ? Colors.blue
-          : waveValue < 420 && waveValue > 385 ||
-          waveValue == 385
-          ? Color.fromRGBO(0, 13, 255, 1)
-          : waveValue < 385 && waveValue > 370 ||
-          waveValue == 370
-          ? Color.fromRGBO(82, 0, 255, 1)
-          : waveValue < 370 && waveValue > 345 ||
-          waveValue == 345
-          ? Color.fromRGBO(113, 49, 160, 1)
+          : waveValue < 590 && waveValue > 565 || waveValue == 565
+          ? Colors.yellow
+          : waveValue < 565 && waveValue > 540 || waveValue == 540
+          ? Colors.lightGreen
+          : waveValue < 540 && waveValue > 500 || waveValue == 500
+          ? Colors.green
+          : waveValue < 500 && waveValue > 485 ||
+          waveValue == 485
+          ? Colors.blue
+          : waveValue < 485 && waveValue > 440 ||
+          waveValue == 440
+          ? Color.fromRGBO(0, 0, 240, 1)
+          : waveValue < 440 && waveValue > 380 ||
+          waveValue == 380
+          ? Color.fromRGBO(102, 0, 204, 1)
           : Colors.blue;
     perpendicularLinePaint
       ..style = PaintingStyle.stroke
@@ -317,10 +314,6 @@ class MyPainter extends CustomPainter {
     middleLine.lineTo((x2 + 160) / 2, size.height / 2 - 10.5);
     canvas.drawPath(middleLine, mainLinePaint);
   }
-
-  //на 50: 270
-  //на 30: 50
-  //на 20: -60
   void drawThirdLine(Canvas canvas, Size size) {
     final thirdLine = Path();
     double widthCalcValue = angleSliderValue * 100;
@@ -353,13 +346,11 @@ class MyPainter extends CustomPainter {
     final double xAngle = 265;
     final angleArc = Path();
     angleArc.moveTo(xAngle, unknownY(xAngle));
-//    Offset(xAngle, unknownY(xAngle) + 44 - angleSliderValue * 19),
     angleArc.arcToPoint(
         Offset(xAngle, unknownY(xAngle) + 20),
         clockwise: waveValue < 24 ? false : true,
         radius: Radius.circular(30));
 
-//    canvas.drawPath(angleArc, yellowAnglePaint);
     final perpendicularRectangle = Path();
     perpendicularRectangle.moveTo(x0 + 20, unknownY(x0 + 20));
     perpendicularRectangle.lineTo(

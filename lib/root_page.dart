@@ -75,7 +75,11 @@ class _LeftMenuState extends State<LeftMenu> {
 
     Widget menuItems(bool isSmallScreen) {
       return Column(children: [
-        space(MediaQuery.of(context).size.height * 0.183),
+        space(MediaQuery.of(context).size.height * 0.135),
+        AspectRatio(
+            aspectRatio: 1.4,
+            child: Image(image: AssetImage('assets/images/dispersion.png'))),
+        space(72),
         getMenuItem(
             onTap: () {
               currentPage.value = MonoLightPage();
@@ -107,17 +111,13 @@ class _LeftMenuState extends State<LeftMenu> {
             text: "About"),
         Spacer(),
         getMenuItem(
-            onTap: () {
-              SystemNavigator.pop();
-//              Future.delayed(Duration(milliseconds: 300)).then(
-//                  (value) => currentPage.value = Container(color: Colors.blue));
-//              Navigator.of(context).push(CupertinoPageRoute(
-//                  builder: (BuildContext context) =>
-//                      Container(color: Colors.blue)));
-            },
+            onTap: () => SystemNavigator.pop(),
             icon: Icons.exit_to_app,
             text: "Exit"),
-        space(MediaQuery.of(context).size.height * 0.12)
+        space(MediaQuery
+            .of(context)
+            .size
+            .height * 0.125)
       ]);
     }
 
