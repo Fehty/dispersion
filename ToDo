@@ -1,0 +1,11 @@
+- Localization
+
+- Different angle on different light color
+- Angle arc
+
+- Test on devices + bug fix(info page returns to the top when open drawer) + test on portrait and landscape + change icons sizes + drawer open reset state(fix it)
+
+
++- Perpendicular continuation
++- Add hamburger on each page to open drawer
++- Only portrait mode

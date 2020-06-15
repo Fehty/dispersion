@@ -9,3 +9,14 @@
 //            return true;
 //          },
 //          child: HomePage()));
+
+//    loadAsset() async {
+////      _info = await rootBundle.loadString('assets/res/dispersion_info.txt');
+//
+//    }
+
+//  loadAsset(BuildContext context) async {
+//    info = await DefaultAssetBundle.of(context)
+//        .loadString('assets/res/dispersion_info.txt');
+//    print(info);
+//  }

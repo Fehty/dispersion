@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
 
+//TextStyle pageTitle = Theme.of(context).textTheme.headline4;
+
+//Padding pageTitlePadding =
+//    Padding(padding: const EdgeInsets.only(top: 54, left: 24));
+
 TextStyle leftMenuTextStyle = TextStyle(
     fontSize: 18,
     fontWeight: FontWeight.w400,

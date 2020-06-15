@@ -1,4 +1,5 @@
 import 'package:dispersion/constants.dart';
+import 'package:dispersion/root_page.dart';
 import 'package:dispersion/widgets/gradient_text.dart';
 import 'package:flutter/material.dart';
 
@@ -10,54 +11,53 @@ class MonoLightPage extends StatefulWidget {
 }
 
 class _MonoLightPageState extends State<MonoLightPage> {
-  double waveSliderValue = 0.0;
-  int waveValue = 380;
+  double _waveSliderValue = 0.0;
+  int _waveValue = 380;
 
-  double angleSliderValue = 0.0;
-  int angleValue = 30;
+  double _angleSliderValue = 0.0;
+  int _angleValue = 30;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black,
-      body: SingleChildScrollView(
-          physics: BouncingScrollPhysics(),
-          padding: const EdgeInsets.all(0),
+        backgroundColor: Colors.black,
+        body: SingleChildScrollView(
+            physics: BouncingScrollPhysics(),
+            padding: const EdgeInsets.all(0),
             child: SizedBox(
-                width: MediaQuery
-                    .of(context)
-                    .size
-                    .width,
-                height: MediaQuery
-                    .of(context)
-                    .size
-                    .height < 600
+                width: MediaQuery.of(context).size.width,
+                height: MediaQuery.of(context).size.height < 600
                     ? 700
-                    : MediaQuery
-                    .of(context)
-                    .size
-                    .height,
+                    : MediaQuery.of(context).size.height,
                 child: Column(children: [
                   Align(
                       alignment: Alignment.topLeft,
                       child: Padding(
-                          padding: const EdgeInsets.only(left: 24, top: 65),
-                          child: GradientText('Light Dispersion',
-                              gradient: mainGradient,
-                              textStyle:
-                              Theme.of(context).textTheme.headline4))),
-                  SizedBox(height: 82),
+                          padding: const EdgeInsets.only(left: 16, top: 54),
+                          child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                GradientText('Монохромное',
+                                    gradient: mainGradient,
+                                    textStyle:
+                                        Theme.of(context).textTheme.headline4),
+                                GradientText('излучение',
+                                    gradient: mainGradient,
+                                    textStyle:
+                                        Theme.of(context).textTheme.headline4)
+                              ]))),
+                  SizedBox(height: 68),
                   SizedBox(
                       width: 320,
                       height: 320,
                       child: CustomPaint(
                           painter: MyPainter(
-                              angleSliderValue, angleValue, waveValue))),
+                              _angleSliderValue, _angleValue, _waveValue))),
                   Spacer(),
                   Padding(
-                      padding: const EdgeInsets.only(left: 24),
+                      padding: const EdgeInsets.only(left: 16),
                       child: Row(children: [
-                        GradientText('α = $angleValue°',
+                        GradientText('α = $_angleValue°',
                             gradient: mainGradient,
                             textStyle: Theme.of(context).textTheme.headline4),
                         Spacer(),
@@ -73,86 +73,75 @@ class _MonoLightPageState extends State<MonoLightPage> {
                                         mainGradient.createShader(Rect.fromLTWH(
                                             0, 0, bounds.width, bounds.height)),
                                     child: Slider(
-                                        value: angleSliderValue,
+                                        value: _angleSliderValue,
                                         activeColor: Colors.white,
                                         inactiveColor:
                                         Color.fromRGBO(138, 171, 193, 0.4),
                                         onChanged: (double value) {
                                           setState(() {
-                                            angleSliderValue = value;
-                                            angleValue =
-                                                (angleSliderValue * 30 + 20)
+                                            _angleSliderValue = value;
+                                            _angleValue =
+                                                (_angleSliderValue * 30 + 20)
                                                     .toInt();
                                           });
                                         }))))
                       ])),
                   Padding(
-                      padding: const EdgeInsets.only(left: 24),
+                      padding: const EdgeInsets.only(left: 16),
                       child: Row(
                           crossAxisAlignment: CrossAxisAlignment.end,
                           children: [
-                            GradientText('λ = $waveValue',
+                            GradientText('λ = $_waveValue',
                                 gradient: mainGradient,
                                 textStyle:
-                                Theme.of(context).textTheme.headline4),
+                                Theme
+                                    .of(context)
+                                    .textTheme
+                                    .headline4),
                             Padding(
                                 padding: const EdgeInsets.only(bottom: 2),
                                 child: GradientText(' нм',
                                     gradient: mainGradient,
                                     textStyle:
-                                    Theme.of(context).textTheme.headline5)),
+                                    Theme
+                                        .of(context)
+                                        .textTheme
+                                        .headline5)),
                             Spacer(),
                             SizedBox(
-                                width: MediaQuery.of(context).size.width * 0.5,
+                                width: MediaQuery
+                                    .of(context)
+                                    .size
+                                    .width * 0.5,
                                 child: SliderTheme(
                                     data: SliderTheme.of(context).copyWith(
                                         trackHeight: 3.0,
                                         thumbShape: RoundSliderThumbShape(
                                             enabledThumbRadius: 12.0)),
                                     child: ShaderMask(
-                                        shaderCallback: (bounds) => mainGradient
-                                            .createShader(Rect.fromLTWH(0, 0,
-                                            bounds.width, bounds.height)),
+                                        shaderCallback: (bounds) =>
+                                            mainGradient
+                                                .createShader(
+                                                Rect.fromLTWH(0, 0,
+                                                    bounds.width,
+                                                    bounds.height)),
                                         child: Slider(
-                                            value: waveSliderValue,
+                                            value: _waveSliderValue,
                                             activeColor: Colors.white,
                                             inactiveColor: Color.fromRGBO(
                                                 138, 171, 193, 0.4),
                                             onChanged: (double value) {
                                               setState(() {
-                                                waveSliderValue = value;
-                                                waveValue =
-                                                    (380 * waveSliderValue +
+                                                _waveSliderValue = value;
+                                                _waveValue =
+                                                    (380 * _waveSliderValue +
                                                         380)
                                                         .toInt();
                                               });
                                             }))))
                           ])),
                   SizedBox(height: 24)
-                ]))),
-//      bottomNavigationBar: BottomNavigationBar(
-//        backgroundColor: Colors.black,
-//        unselectedItemColor:   Colors.white,
-//
-//        currentIndex: 1, // this will be set when a new tab is tapped
-//        items: [
-//          BottomNavigationBarItem(
-//            backgroundColor: Colors.white,
-//
-//            icon: new Icon(Icons.home),
-//            title: new Text('Home'),
-//          ),
-//          BottomNavigationBarItem(
-//            icon: new Icon(Icons.mail),
-//            title: new Text('Messages'),
-//          ),
-//          BottomNavigationBarItem(
-//              icon: Icon(Icons.person),
-//              title: Text('Profile')
-//          )
-//        ],
-//      ),
-    );
+                ]))));
   }
 }
 
@@ -164,16 +153,21 @@ class MyPainter extends CustomPainter {
 
   MyPainter(this.angleSliderValue, this.angleValue, this.waveValue);
 
-  final mainLinePaint = Paint();
-  final perpendicularLinePaint = Paint();
-  final yellowAnglePaint = Paint();
-  final perpendicularRectanglePaint = Paint();
+  final _mainLinePaint = Paint();
+  final _perpendicularLinePaint = Paint();
+  final _yellowAnglePaint = Paint();
+  final _perpendicularRectanglePaint = Paint();
 
   @override
   void paint(Canvas canvas, Size size) {
-    mainLinePaint
+    if (newAppEnter.value) {
+      innerDrawerKey.currentState.open();
+      Future.delayed(Duration(milliseconds: 900))
+          .then((value) => newAppEnter.value = false);
+    }
+    _mainLinePaint
       ..style = PaintingStyle.stroke
-      ..strokeWidth = 3.5
+      ..strokeWidth = 4
       ..color = waveValue > 625 || waveValue == 625
           ? Colors.red
           : waveValue < 625 && waveValue > 590 || waveValue == 590
@@ -194,15 +188,15 @@ class MyPainter extends CustomPainter {
           waveValue == 380
           ? Color.fromRGBO(102, 0, 204, 1)
           : Colors.blue;
-    perpendicularLinePaint
+    _perpendicularLinePaint
       ..style = PaintingStyle.stroke
-      ..strokeWidth = 3
+      ..strokeWidth = 2
       ..color = Colors.white;
-    yellowAnglePaint
+    _yellowAnglePaint
       ..style = PaintingStyle.stroke
       ..strokeWidth = 3
       ..color = Colors.yellow;
-    perpendicularRectanglePaint
+    _perpendicularRectanglePaint
       ..style = PaintingStyle.stroke
       ..strokeWidth = 3
       ..color = Colors.red;
@@ -219,7 +213,8 @@ class MyPainter extends CustomPainter {
   void drawTriangle(Canvas canvas, Size size) {
     double widthCalcValue = angleSliderValue * 106;
     final rect = Rect.fromLTWH(0.0, 0.0, size.width, size.height);
-    final trianglePaint = Paint()..shader = mainGradient.createShader(rect);
+    final trianglePaint = Paint()
+      ..shader = mainGradient.createShader(rect);
     var trianglePath = Path();
     trianglePath.moveTo(size.width / 2, 0);
     trianglePath.lineTo(size.width / 3 - widthCalcValue, size.height);
@@ -249,7 +244,7 @@ class MyPainter extends CustomPainter {
     double x1 = size.width / 3 - widthCalcValue;
 
     canvas.drawLine(Offset(-250, size.height),
-        Offset((x1 + 160) / 2, size.height / 2), mainLinePaint);
+        Offset((x1 + 160) / 2, size.height / 2), _mainLinePaint);
   }
 
   void drawFirstLinePerpendicular(Canvas canvas, Size size) {
@@ -270,13 +265,15 @@ class MyPainter extends CustomPainter {
     }
 
     canvas.drawLine(
-        Offset(x0, y0), Offset(10, unknownY(10)), perpendicularLinePaint);
+        Offset(x0, y0), Offset(10, unknownY(10)), _perpendicularLinePaint);
 
     final double xAngle = 60;
     final angleArc = Path();
     angleArc.moveTo(xAngle, unknownY(xAngle));
     angleArc.arcToPoint(
-        Offset(xAngle, unknownY(xAngle) + 44 - angleSliderValue * 19),
+        Offset(xAngle, linearEquationGetY(
+            LinearPoints(-250, size.height, x0, y0), xAngle)),
+//        Offset(xAngle, unknownY(xAngle) + 44 - angleSliderValue * 19),
         clockwise: false,
         radius: Radius.circular(30));
     final anglePaint = Paint()
@@ -302,7 +299,7 @@ class MyPainter extends CustomPainter {
         x0 - 17 + angleSliderValue * 7, 135 - angleSliderValue * 8);
     perpendicularRectangle.lineTo(x0 + 3 + angleSliderValue * 6,
         unknownY(x0 + 10) - 23 - angleSliderValue * 4);
-    canvas.drawPath(perpendicularRectangle, perpendicularRectanglePaint);
+    canvas.drawPath(perpendicularRectangle, _perpendicularRectanglePaint);
   }
 
   void drawMiddleLine(Canvas canvas, Size size) {
@@ -312,15 +309,16 @@ class MyPainter extends CustomPainter {
     double x2 = size.width - size.width / 3 + widthCalcValue;
     middleLine.moveTo((x1 + 160) / 2, size.height / 2);
     middleLine.lineTo((x2 + 160) / 2, size.height / 2 - 10.5);
-    canvas.drawPath(middleLine, mainLinePaint);
+    canvas.drawPath(middleLine, _mainLinePaint);
   }
+
   void drawThirdLine(Canvas canvas, Size size) {
     final thirdLine = Path();
     double widthCalcValue = angleSliderValue * 100;
     double x1 = size.width - size.width / 3 + widthCalcValue;
     thirdLine.moveTo((x1 + 160) / 2, size.height / 2 - 10.5);
     thirdLine.lineTo(1000, -60 + angleSliderValue * 330);
-    canvas.drawPath(thirdLine, mainLinePaint);
+    canvas.drawPath(thirdLine, _mainLinePaint);
   }
 
   void drawThirdLinePerpendicular(Canvas canvas, Size size) {
@@ -341,15 +339,13 @@ class MyPainter extends CustomPainter {
     }
 
     canvas.drawLine(
-        Offset(x0, y0), Offset(310, unknownY(310)), perpendicularLinePaint);
+        Offset(x0, y0), Offset(310, unknownY(310)), _perpendicularLinePaint);
 
     final double xAngle = 265;
     final angleArc = Path();
     angleArc.moveTo(xAngle, unknownY(xAngle));
-    angleArc.arcToPoint(
-        Offset(xAngle, unknownY(xAngle) + 20),
-        clockwise: waveValue < 24 ? false : true,
-        radius: Radius.circular(30));
+    angleArc.arcToPoint(Offset(xAngle, unknownY(xAngle) + 20),
+        clockwise: waveValue < 24 ? false : true, radius: Radius.circular(30));
 
     final perpendicularRectangle = Path();
     perpendicularRectangle.moveTo(x0 + 20, unknownY(x0 + 20));
@@ -357,7 +353,7 @@ class MyPainter extends CustomPainter {
         x0 + 16 - 8 * angleSliderValue, 123 - angleSliderValue * 5);
     perpendicularRectangle.lineTo(x0 - 6 - 6 * angleSliderValue,
         unknownY(x0) - 21.5 - angleSliderValue * -1);
-    canvas.drawPath(perpendicularRectangle, perpendicularRectanglePaint);
+    canvas.drawPath(perpendicularRectangle, _perpendicularRectanglePaint);
 
     final textPainter = TextPainter(
         text: TextSpan(
@@ -369,6 +365,29 @@ class MyPainter extends CustomPainter {
     textPainter.paint(canvas, offset);
   }
 
+  double linearEquationGetY(LinearPoints points, double x) {
+    final double x1 = points.x1;
+    final double y1 = points.y1;
+    final double x2 = points.x2;
+    final double y2 = points.y2;
+
+    final double numerator = -(x1 * y2 - x2 * y1) - (y1 - y2) * x;
+    final double denominator = (x2 - x1);
+    final y = numerator / denominator;
+
+    return y;
+  }
+
+
   @override
   bool shouldRepaint(CustomPainter oldDelegate) => true;
+}
+
+class LinearPoints {
+  final double x1;
+  final double y1;
+  final double x2;
+  final double y2;
+
+  const LinearPoints(this.x1, this.y1, this.x2, this.y2);
 }

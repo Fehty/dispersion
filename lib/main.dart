@@ -1,5 +1,6 @@
 import 'package:dispersion/root_page.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 
 main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -16,6 +17,14 @@ class MyApp extends StatelessWidget {
         },
         child: MaterialApp(
             title: 'Dispersion',
+            localizationsDelegates: [
+              GlobalMaterialLocalizations.delegate,
+              GlobalWidgetsLocalizations.delegate
+            ],
+            supportedLocales: [
+              const Locale('en', 'US'),
+              const Locale('de', 'DE')
+            ],
             theme:
                 ThemeData(visualDensity: VisualDensity.adaptivePlatformDensity),
             home: RootPage()));
