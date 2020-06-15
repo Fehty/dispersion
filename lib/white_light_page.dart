@@ -12,7 +12,7 @@ class WhiteLightPage extends StatefulWidget {
 
 class _WhiteLightPageState extends State<WhiteLightPage> {
   double _angleSliderValue = 0.0;
-  int _angleValue = 30;
+  int _angleValue = 20;
 
   @override
   Widget build(BuildContext context) {

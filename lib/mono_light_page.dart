@@ -15,7 +15,7 @@ class _MonoLightPageState extends State<MonoLightPage> {
   int _waveValue = 380;
 
   double _angleSliderValue = 0.0;
-  int _angleValue = 30;
+  int _angleValue = 20;
 
   @override
   Widget build(BuildContext context) {
@@ -51,8 +51,8 @@ class _MonoLightPageState extends State<MonoLightPage> {
                       width: 320,
                       height: 320,
                       child: CustomPaint(
-                          painter: MyPainter(
-                              _angleSliderValue, _angleValue, _waveValue))),
+                          painter: MyPainter(_angleSliderValue, _angleValue,
+                              _waveSliderValue, _waveValue))),
                   Spacer(),
                   Padding(
                       padding: const EdgeInsets.only(left: 16),
@@ -149,9 +149,11 @@ class MyPainter extends CustomPainter {
   final angleSliderValue;
   final angleValue;
 
+  final waveSliderValue;
   final waveValue;
 
-  MyPainter(this.angleSliderValue, this.angleValue, this.waveValue);
+  MyPainter(this.angleSliderValue, this.angleValue, this.waveSliderValue,
+      this.waveValue);
 
   final _mainLinePaint = Paint();
   final _perpendicularLinePaint = Paint();
@@ -198,8 +200,8 @@ class MyPainter extends CustomPainter {
       ..color = Colors.yellow;
     _perpendicularRectanglePaint
       ..style = PaintingStyle.stroke
-      ..strokeWidth = 3
-      ..color = Colors.red;
+      ..strokeWidth = 2
+      ..color = Colors.white;
 
     drawTriangle(canvas, size);
     drawAngle(canvas, size);
@@ -271,8 +273,10 @@ class MyPainter extends CustomPainter {
     final angleArc = Path();
     angleArc.moveTo(xAngle, unknownY(xAngle));
     angleArc.arcToPoint(
-        Offset(xAngle, linearEquationGetY(
-            LinearPoints(-250, size.height, x0, y0), xAngle)),
+        Offset(
+            xAngle,
+            linearEquationGetY(
+                LinearPoints(-250, size.height, x0, y0), xAngle)),
 //        Offset(xAngle, unknownY(xAngle) + 44 - angleSliderValue * 19),
         clockwise: false,
         radius: Radius.circular(30));
@@ -317,7 +321,9 @@ class MyPainter extends CustomPainter {
     double widthCalcValue = angleSliderValue * 100;
     double x1 = size.width - size.width / 3 + widthCalcValue;
     thirdLine.moveTo((x1 + 160) / 2, size.height / 2 - 10.5);
-    thirdLine.lineTo(1000, -60 + angleSliderValue * 330);
+    thirdLine.lineTo(1000,
+        -80 + angleSliderValue * 330 + 25 - waveSliderValue * 25);
+//        -80 + angleSliderValue * 330 + 25 - (waveSliderValue * 0.33) * 25);
     canvas.drawPath(thirdLine, _mainLinePaint);
   }
 
@@ -355,9 +361,11 @@ class MyPainter extends CustomPainter {
         unknownY(x0) - 21.5 - angleSliderValue * -1);
     canvas.drawPath(perpendicularRectangle, _perpendicularRectanglePaint);
 
+//    double secondAngle = secondAngleData[angleValue];
+    double secondAngle = 1.63 * angleValue - firstAngleData[angleValue];
     final textPainter = TextPainter(
         text: TextSpan(
-            text: '${secondAngleData[angleValue]}°',
+            text: '${secondAngle.toStringAsFixed(2)}°',
             style: TextStyle(color: Colors.yellow, fontSize: 27)),
         textDirection: TextDirection.ltr);
     textPainter.layout(minWidth: 0, maxWidth: size.width);
@@ -377,7 +385,6 @@ class MyPainter extends CustomPainter {
 
     return y;
   }
-
 
   @override
   bool shouldRepaint(CustomPainter oldDelegate) => true;
