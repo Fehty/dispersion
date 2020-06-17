@@ -19,7 +19,8 @@ class MyApp extends StatelessWidget {
             title: 'Dispersion',
             localizationsDelegates: [
               GlobalMaterialLocalizations.delegate,
-              GlobalWidgetsLocalizations.delegate
+              GlobalWidgetsLocalizations.delegate,
+              GlobalCupertinoLocalizations.delegate,
             ],
             supportedLocales: [
               const Locale('en', 'US'),

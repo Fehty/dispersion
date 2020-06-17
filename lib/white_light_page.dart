@@ -18,6 +18,14 @@ class _WhiteLightPageState extends State<WhiteLightPage> {
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: Colors.black,
+        appBar: PreferredSize(
+            preferredSize: Size.fromHeight(60.0), // her
+            child: AppBar(
+                backgroundColor: Color.fromRGBO(78, 133, 172, 1),
+                leading: IconButton(
+                    icon: const Icon(Icons.menu),
+                    onPressed: () => innerDrawerKey.currentState.open()),
+                title: const Text('Белое излучение'))),
         body: SingleChildScrollView(
             physics: BouncingScrollPhysics(),
             padding: const EdgeInsets.all(0),
@@ -25,27 +33,27 @@ class _WhiteLightPageState extends State<WhiteLightPage> {
                 width: MediaQuery.of(context).size.width,
                 height: MediaQuery.of(context).size.height < 600
                     ? 548
-                    : MediaQuery.of(context).size.height,
+                    : MediaQuery.of(context).size.height - 90,
                 child: Column(children: [
-                  Align(
-                      alignment: Alignment.topLeft,
-                      child: Padding(
-                          padding: const EdgeInsets.only(left: 16, top: 54),
-                          child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                GradientText('Белое излучение',
-                                    gradient: mainGradient,
-                                    textStyle:
-                                        Theme.of(context).textTheme.headline4),
-//                                GradientText('излучение',
+//                  Align(
+//                      alignment: Alignment.topLeft,
+//                      child: Padding(
+//                          padding: const EdgeInsets.only(left: 16, top: 54),
+//                          child: Column(
+//                              crossAxisAlignment: CrossAxisAlignment.start,
+//                              children: [
+//                                GradientText('Белое излучение',
 //                                    gradient: mainGradient,
 //                                    textStyle:
-//                                    Theme
-//                                        .of(context)
-//                                        .textTheme
-//                                        .headline4)
-                              ]))),
+//                                        Theme.of(context).textTheme.headline4),
+////                                GradientText('излучение',
+////                                    gradient: mainGradient,
+////                                    textStyle:
+////                                    Theme
+////                                        .of(context)
+////                                        .textTheme
+////                                        .headline4)
+//                              ]))),
                   SizedBox(
                       height:
                           MediaQuery.of(context).size.height < 600 ? 60 : 120),
@@ -92,7 +100,7 @@ class _WhiteLightPageState extends State<WhiteLightPage> {
                                           });
                                         }))))
                       ])),
-                  SizedBox(height: 24)
+                  SizedBox(height: 6)
                 ]))));
   }
 }
@@ -104,10 +112,12 @@ class MyPainter extends CustomPainter {
   MyPainter(this.angleSliderValue, this.angleValue);
 
   final _firstLinePaint = Paint();
-
   final _perpendicularLinePaint = Paint();
   final _yellowAnglePaint = Paint();
   final _perpendicularRectanglePaint = Paint();
+
+  double _firstWidthCalc;
+  double _secondWidthCalc;
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -118,7 +128,7 @@ class MyPainter extends CustomPainter {
     }
     _firstLinePaint
       ..style = PaintingStyle.stroke
-      ..strokeWidth = 3
+      ..strokeWidth = 2
       ..color = Colors.white;
 
 //    _mainLinePaint
@@ -157,6 +167,9 @@ class MyPainter extends CustomPainter {
       ..strokeWidth = 3
       ..color = Colors.white;
 
+    _firstWidthCalc = angleSliderValue * 106;
+    _secondWidthCalc = angleSliderValue * 100;
+
     drawTriangle(canvas, size);
     drawAngle(canvas, size);
     drawFirstLine(canvas, size);
@@ -167,14 +180,15 @@ class MyPainter extends CustomPainter {
   }
 
   void drawTriangle(Canvas canvas, Size size) {
-    double widthCalcValue = angleSliderValue * 106;
+//    double widthCalcValue = angleSliderValue * 106;
     final rect = Rect.fromLTWH(0.0, 0.0, size.width, size.height);
-    final trianglePaint = Paint()..shader = mainGradient.createShader(rect);
+    final trianglePaint = Paint()
+      ..shader = mainGradient.createShader(rect);
     var trianglePath = Path();
     trianglePath.moveTo(size.width / 2, 0);
-    trianglePath.lineTo(size.width / 3 - widthCalcValue, size.height);
+    trianglePath.lineTo(size.width / 3 - _firstWidthCalc, size.height);
     trianglePath.lineTo(
-        size.width - size.width / 3 + widthCalcValue, size.height);
+        size.width - size.width / 3 + _firstWidthCalc, size.height);
     trianglePath.close();
     canvas.drawPath(trianglePath, trianglePaint);
   }
@@ -195,18 +209,18 @@ class MyPainter extends CustomPainter {
   }
 
   void drawFirstLine(Canvas canvas, Size size) {
-    double widthCalcValue = angleSliderValue * 100;
-    double x1 = size.width / 3 - widthCalcValue;
+//    double widthCalcValue = angleSliderValue * 100;
+    double x1 = size.width / 3 - _secondWidthCalc;
 
     canvas.drawLine(Offset(-250, size.height),
         Offset((x1 + 160) / 2, size.height / 2), _firstLinePaint);
   }
 
   void drawFirstLinePerpendicular(Canvas canvas, Size size) {
-    double widthCalcValue = angleSliderValue * 100;
-    double x0 = (size.width / 3 - widthCalcValue + 160) / 2;
+//    double widthCalcValue = angleSliderValue * 100;
+    double x0 = (size.width / 3 - _secondWidthCalc + 160) / 2;
     double y0 = size.height / 2;
-    double xa = size.width / 3 - widthCalcValue;
+    double xa = size.width / 3 - _secondWidthCalc;
     double xb = 160;
     double ya = 320;
     double yb = 0;
@@ -265,8 +279,8 @@ class MyPainter extends CustomPainter {
       ..strokeWidth = 3
       ..color = Colors.white;
 
-    double widthCalcValue = angleSliderValue * 100;
-    double x0 = (size.width / 3 - widthCalcValue + 160) / 2;
+//    double widthCalcValue = angleSliderValue * 100;
+    double x0 = (size.width / 3 - _secondWidthCalc + 160) / 2;
     double y0 = size.height / 2;
 
     final arrowPath1 = Path();
@@ -324,9 +338,9 @@ class MyPainter extends CustomPainter {
       ..style = PaintingStyle.stroke
       ..strokeWidth = 0.3
       ..color = Colors.purple;
-    double widthCalcValue = angleSliderValue * 100;
-    double x1 = size.width / 3 - widthCalcValue;
-    double x2 = size.width - size.width / 3 + widthCalcValue - 5;
+//    double widthCalcValue = angleSliderValue * 100;
+    double x1 = size.width / 3 - _secondWidthCalc;
+    double x2 = size.width - size.width / 3 + _secondWidthCalc - 5;
     middleLine1.moveTo((x1 + 160) / 2, size.height / 2);
     middleLine1.lineTo(
         (x2 + 160) / 2 - angleSliderValue * 2, size.height / 2 - 17);
@@ -356,8 +370,8 @@ class MyPainter extends CustomPainter {
   }
 
   void drawThirdLine(Canvas canvas, Size size) {
-    double widthCalcValue = angleSliderValue * 100;
-    double x2 = size.width - size.width / 3 + widthCalcValue;
+//    double widthCalcValue = angleSliderValue * 100;
+    double x2 = size.width - size.width / 3 + _secondWidthCalc;
 
     final redLine = Path();
     final redPaint = Paint()

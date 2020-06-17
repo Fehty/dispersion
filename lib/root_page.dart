@@ -125,7 +125,7 @@ class _LeftMenuState extends State<LeftMenu> {
             .height * 0.13),
         AspectRatio(
             aspectRatio: 1.4,
-            child: Image(image: AssetImage('assets/images/logo.png'))),
+            child: Image(image: AssetImage('assets/images/new_logo.png'))),
         space(),
         Text('Дисперсия', style: leftMenuTextStyle.copyWith(fontSize: 30)),
         space(52),
