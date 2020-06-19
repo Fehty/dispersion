@@ -1,10 +1,13 @@
-- Hamburger animation
-- Sliver appBar on info page
-- Welcome page
+- change icons sizes
+- change language menu attach to the left menu when landscape
+- take attention to padding
+- menu item think an appropriate name
 
-- Localization
-- Test on devices + read text(gaps) + bug fix(info page returns to the top when open drawer, take attention to padding, image sizes) + test on portrait and landscape + change icons sizes + drawer open reset state(fix it)
+- constant update
+- drawer open reset state
+- test on devices(portrait and landscape)
+
+
 
 +- White color light animation
-
 +- Perpendicular continuation

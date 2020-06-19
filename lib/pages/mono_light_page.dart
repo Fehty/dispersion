@@ -1,5 +1,6 @@
 import 'package:dispersion/constants.dart';
-import 'package:dispersion/root_page.dart';
+import 'package:dispersion/locale/app_localization.dart';
+import 'package:dispersion/pages/root_page.dart';
 import 'package:dispersion/widgets/gradient_text.dart';
 import 'package:flutter/material.dart';
 
@@ -28,17 +29,15 @@ class _MonoLightPageState extends State<MonoLightPage> {
                 leading: IconButton(
                     icon: const Icon(Icons.menu),
                     onPressed: () => innerDrawerKey.currentState.open()),
-                title: const Text('Монохромное излучение'))),
+                title: Text(AppLocalization.of(context).fullMonoLight))),
         body: SingleChildScrollView(
           padding: const EdgeInsets.all(0),
           physics: BouncingScrollPhysics(),
           child: SizedBox(
               width: MediaQuery.of(context).size.width,
               height: MediaQuery.of(context).size.height < 600
-                  ? 700
-                  : MediaQuery.of(context).size.height -
-                      AppBar().preferredSize.height -
-                      20,
+                  ? 590
+                  : MediaQuery.of(context).size.height - 90,
               child: Column(children: [
 //                Align(
 //                    alignment: Alignment.topLeft,
@@ -57,7 +56,8 @@ class _MonoLightPageState extends State<MonoLightPage> {
 //                                      Theme.of(context).textTheme.headline4)
 //                            ])
 //                    )),
-                SizedBox(height: 80),
+                SizedBox(
+                    height: MediaQuery.of(context).size.height < 600 ? 60 : 80),
                 SizedBox(
                     width: 320,
                     height: 320,
@@ -66,7 +66,7 @@ class _MonoLightPageState extends State<MonoLightPage> {
                             _waveSliderValue, _waveValue))),
                 Spacer(),
                 Padding(
-                    padding: const EdgeInsets.only(left: 17, bottom: 5),
+                    padding: const EdgeInsets.only(left: 17, bottom: 6),
                     child: Align(
                         alignment: Alignment.centerLeft,
                         child: Row(
@@ -128,10 +128,16 @@ class _MonoLightPageState extends State<MonoLightPage> {
                               textStyle: Theme.of(context).textTheme.headline4),
                           Padding(
                               padding: const EdgeInsets.only(bottom: 2),
-                              child: GradientText(' нм',
+                              child: GradientText(
+                                  ' ${AppLocalization
+                                      .of(context)
+                                      .nm}',
                                   gradient: mainGradient,
                                   textStyle:
-                                      Theme.of(context).textTheme.headline5)),
+                                  Theme
+                                      .of(context)
+                                      .textTheme
+                                      .headline5)),
                           Spacer(),
                           SizedBox(
                               width: MediaQuery.of(context).size.width * 0.5,
@@ -158,7 +164,7 @@ class _MonoLightPageState extends State<MonoLightPage> {
                                             });
                                           }))))
                         ])),
-                SizedBox(height: 24)
+                SizedBox(height: 12)
               ])),
         ));
   }
@@ -186,7 +192,7 @@ class MyPainter extends CustomPainter {
   void paint(Canvas canvas, Size size) {
     if (newAppEnter.value) {
       innerDrawerKey.currentState.open();
-      Future.delayed(Duration(milliseconds: 900))
+      Future.delayed(Duration(milliseconds: 1200))
           .then((value) => newAppEnter.value = false);
     }
 

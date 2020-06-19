@@ -1,5 +1,6 @@
 import 'package:dispersion/constants.dart';
-import 'package:dispersion/root_page.dart';
+import 'package:dispersion/locale/app_localization.dart';
+import 'package:dispersion/pages/root_page.dart';
 import 'package:dispersion/widgets/gradient_text.dart';
 import 'package:flutter/material.dart';
 
@@ -25,14 +26,14 @@ class _WhiteLightPageState extends State<WhiteLightPage> {
                 leading: IconButton(
                     icon: const Icon(Icons.menu),
                     onPressed: () => innerDrawerKey.currentState.open()),
-                title: const Text('Белое излучение'))),
+                title: Text(AppLocalization.of(context).fullWhiteLight))),
         body: SingleChildScrollView(
             physics: BouncingScrollPhysics(),
             padding: const EdgeInsets.all(0),
             child: SizedBox(
                 width: MediaQuery.of(context).size.width,
-                height: MediaQuery.of(context).size.height < 600
-                    ? 548
+                height: MediaQuery.of(context).size.height < 500
+                    ? 500
                     : MediaQuery.of(context).size.height - 90,
                 child: Column(children: [
 //                  Align(
@@ -56,50 +57,89 @@ class _WhiteLightPageState extends State<WhiteLightPage> {
 //                              ]))),
                   SizedBox(
                       height:
-                          MediaQuery.of(context).size.height < 600 ? 60 : 120),
-                  Container(
-//                      color: Colors.red,
-                      child: SizedBox(
-                          width: 320,
-                          height: 320,
-                          child: CustomPaint(
-                              painter:
-                                  MyPainter(_angleSliderValue, _angleValue)))),
+                      MediaQuery
+                          .of(context)
+                          .size
+                          .height < 600 ? 60 : 135),
+                  SizedBox(
+                      width: 320,
+                      height: 320,
+                      child: CustomPaint(
+                          painter: MyPainter(_angleSliderValue, _angleValue))),
                   Spacer(),
-                  Padding(
-                      padding: const EdgeInsets.only(left: 16),
-                      child: Row(children: [
-                        GradientText('α = $_angleValue°',
-                            gradient: mainGradient,
-                            textStyle: Theme.of(context).textTheme.headline4),
-                        Spacer(),
-                        SizedBox(
-                            width: MediaQuery.of(context).size.height < 600
-                                ? MediaQuery.of(context).size.width * 0.75
-                                : MediaQuery.of(context).size.width * 0.5,
-                            child: SliderTheme(
-                                data: SliderTheme.of(context).copyWith(
-                                    trackHeight: 3.0,
-                                    thumbShape: RoundSliderThumbShape(
-                                        enabledThumbRadius: 12.0)),
-                                child: ShaderMask(
-                                    shaderCallback: (bounds) =>
-                                        mainGradient.createShader(Rect.fromLTWH(
-                                            0, 0, bounds.width, bounds.height)),
-                                    child: Slider(
-                                        value: _angleSliderValue,
-                                        activeColor: Colors.white,
-                                        inactiveColor:
-                                            Color.fromRGBO(138, 171, 193, 0.4),
-                                        onChanged: (double value) {
-                                          setState(() {
-                                            _angleSliderValue = value;
-                                            _angleValue =
-                                                (_angleSliderValue * 30 + 20)
-                                                    .toInt();
-                                          });
-                                        }))))
-                      ])),
+                  Align(
+                      alignment: Alignment.center,
+                      child: GradientText('α = $_angleValue°',
+                          gradient: mainGradient,
+                          textStyle: Theme
+                              .of(context)
+                              .textTheme
+                              .headline4)),
+//                  SizedBox(height: 6),
+                  Align(
+                    alignment: Alignment.center,
+                    child: SizedBox(
+                        width: MediaQuery
+                            .of(context)
+                            .size
+                            .width * 0.9,
+                        child: SliderTheme(
+                            data: SliderTheme.of(context).copyWith(
+                                trackHeight: 3.0,
+                                thumbShape: RoundSliderThumbShape(
+                                    enabledThumbRadius: 12.0)),
+                            child: ShaderMask(
+                                shaderCallback: (bounds) =>
+                                    mainGradient.createShader(Rect.fromLTWH(
+                                        0, 0, bounds.width, bounds.height)),
+                                child: Slider(
+                                    value: _angleSliderValue,
+                                    activeColor: Colors.white,
+                                    inactiveColor:
+                                    Color.fromRGBO(138, 171, 193, 0.4),
+                                    onChanged: (double value) {
+                                      setState(() {
+                                        _angleSliderValue = value;
+                                        _angleValue =
+                                            (_angleSliderValue * 30 + 20)
+                                                .toInt();
+                                      });
+                                    })))),
+                  ),
+//                  Padding(
+//                      padding: const EdgeInsets.only(left: 16),
+//                      child: Row(children: [
+//                        GradientText('α = $_angleValue°',
+//                            gradient: mainGradient,
+//                            textStyle: Theme.of(context).textTheme.headline4),
+//                        Spacer(),
+//                        SizedBox(
+//                            width: MediaQuery.of(context).size.height < 600
+//                                ? MediaQuery.of(context).size.width * 0.75
+//                                : MediaQuery.of(context).size.width * 0.5,
+//                            child: SliderTheme(
+//                                data: SliderTheme.of(context).copyWith(
+//                                    trackHeight: 3.0,
+//                                    thumbShape: RoundSliderThumbShape(
+//                                        enabledThumbRadius: 12.0)),
+//                                child: ShaderMask(
+//                                    shaderCallback: (bounds) =>
+//                                        mainGradient.createShader(Rect.fromLTWH(
+//                                            0, 0, bounds.width, bounds.height)),
+//                                    child: Slider(
+//                                        value: _angleSliderValue,
+//                                        activeColor: Colors.white,
+//                                        inactiveColor:
+//                                            Color.fromRGBO(138, 171, 193, 0.4),
+//                                        onChanged: (double value) {
+//                                          setState(() {
+//                                            _angleSliderValue = value;
+//                                            _angleValue =
+//                                                (_angleSliderValue * 30 + 20)
+//                                                    .toInt();
+//                                          });
+//                                        }))))
+//                      ])),
                   SizedBox(height: 6)
                 ]))));
   }

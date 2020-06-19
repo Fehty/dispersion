@@ -1,9 +1,11 @@
 {
   "@@last_modified": "2019-06-27T22:25:57.081431",
-  "heyWorld": "Hey World",
-  "@heyWorld": {
-    "description": "Simple world for greeting ",
-    "type": "text",
-    "placeholders": {}
-  }
+  "@@locale": "en",
+  "appName": "Dispersion",
+  "whiteLight": "White light",
+  "monoLight": "Monochrome",
+  "info": "Information",
+  "exit": "Exit",
+  "nm": "nm",
+  "infoText": "Light is an electromagnetic wave. Visible light is a wave that has a length in the range from 380 to 760 nanometers (from purple to red), inclusive.\n\nAs early as 1672, Newton noticed that the refractive index depends on the wavelength. In other words, red light falling on the surface and being refracted will deviate to a different angle than yellow, green, and so on. This dependence is called variance.\n\nThe rainbow is the result of dispersion!\n\nBy passing white light through a prism, you can get a spectrum consisting of all the colors of the rainbow. This phenomenon is directly explained by the dispersion of light. If the refractive index depends on the wavelength, then it also depends on the frequency. Accordingly, the speed of light for different wavelengths in the substance will also be different.\n\nDispersion of light – the dependence of the speed of light in a substance on frequency.\n\nWhere there is dispersion of light? In many areas! For example, in art(rainbow), industry(paints, additives for fabrics), household chemicals (starches). You can also observe the color \"play of light\" on the edges of the diamond, if we are talking about jewelry.\n\nThe dispersion of light is an interesting physical phenomenon that nature has given us!"
 }

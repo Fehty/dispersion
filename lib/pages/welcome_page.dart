@@ -2,7 +2,7 @@ import 'package:dispersion/widgets/gradient_text.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import 'constants.dart';
+import '../constants.dart';
 
 class WelcomePage extends StatelessWidget {
   @override
@@ -17,7 +17,7 @@ class WelcomePage extends StatelessWidget {
               child: Image(image: AssetImage('assets/images/new_logo.png'))),
           SizedBox(height: 12),
           Flexible(
-              child: GradientText('Дисперсия',
+              child: GradientText('Dispersion',
                   textStyle: leftMenuTextStyle.copyWith(fontSize: 30),
                   gradient: rainbowGradient))
 //          Flexible(

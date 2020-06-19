@@ -516,3 +516,12 @@
 //}
 //
 //
+
+//            getMenuItem(
+//                onTap: () => SystemNavigator.pop(),
+//                icon: Image(
+//                    image: AssetImage('assets/images/exit.png'),
+//                    color: Colors.white,
+//                    width: 23,
+//                    height: 23),
+//                text: AppLocalization.of(context).exit),
