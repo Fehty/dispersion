@@ -4,12 +4,11 @@
 - menu item think an appropriate name
 - drawer open resets state
 - init language earlier
-
 - change everywhere language
-
 - constant update
-- test on devices(portrait and landscape)
 
+- rename assets files
+- test on devices(portrait and landscape)
 
 
 +- White color light animation

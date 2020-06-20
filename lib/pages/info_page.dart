@@ -47,36 +47,37 @@ class _InfoPageState extends State<InfoPage> {
                       title: Text(AppLocalization.of(context).info))
                 ],
             body: ListView(
-                padding: const EdgeInsets.all(0),
+                padding: const EdgeInsets.all(12),
                 physics: BouncingScrollPhysics(),
                 children: [
-                  SizedBox(height: 12),
+//                  SizedBox(height: 12),
 //              Padding(
 //                  padding: const EdgeInsets.only(left: 16, right: 16),
 //                  child: GradientText('Информация',
 //                      textStyle: Theme.of(context).textTheme.headline4,
 //                      gradient: mainGradient)),
 //              SizedBox(height: 16),
-                  Padding(
-                      padding: const EdgeInsets.only(left: 12, right: 12),
-                      child: Text(_firstHalf.toString(),
-                          style: Theme.of(context)
-                              .textTheme
-                              .headline6
-                              .copyWith(color: Colors.blueGrey))),
+                  Text(_firstHalf.toString(),
+                      style: Theme.of(context)
+                          .textTheme
+                          .headline6
+                          .copyWith(color: Colors.blueGrey)),
 //                  SizedBox(height: 4),
                   Image(
                       image: AssetImage('assets/images/rainbow.jpg'),
-                      fit: BoxFit.fitWidth),
+                      height: MediaQuery.of(context).size.width < 600
+                          ? MediaQuery.of(context).size.width * 0.7
+                          : MediaQuery.of(context).size.width * 0.4,
+                      width: MediaQuery.of(context).size.width < 600
+                          ? MediaQuery.of(context).size.width
+                          : MediaQuery.of(context).size.width * 0.4),
 //                  SizedBox(height: 4),
-                  Padding(
-                      padding: const EdgeInsets.only(left: 12, right: 12),
-                      child: Text(_secondHalf.toString(),
-                          style: Theme.of(context)
-                              .textTheme
-                              .headline6
-                              .copyWith(color: Colors.blueGrey))),
-                  SizedBox(height: 12)
+                  Text(_secondHalf.toString(),
+                      style: Theme.of(context)
+                          .textTheme
+                          .headline6
+                          .copyWith(color: Colors.blueGrey)),
+//                  SizedBox(height: 12)
                 ])));
   }
 }

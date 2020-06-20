@@ -152,11 +152,11 @@ class MyPainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    if (newAppEnter.value) {
-      innerDrawerKey.currentState.open();
-      Future.delayed(Duration(milliseconds: 900))
-          .then((value) => newAppEnter.value = false);
-    }
+//    if (newAppEnter.value) {
+//      innerDrawerKey.currentState.open();
+//      Future.delayed(Duration(milliseconds: 900))
+//          .then((value) => newAppEnter.value = false);
+//    }
     _firstLinePaint
       ..style = PaintingStyle.stroke
       ..strokeWidth = 2

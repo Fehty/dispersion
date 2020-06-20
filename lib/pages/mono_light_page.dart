@@ -38,7 +38,7 @@ class _MonoLightPageState extends State<MonoLightPage> {
           child: SizedBox(
               width: MediaQuery.of(context).size.width,
               height: MediaQuery.of(context).size.height < 600
-                  ? 590
+                  ? 530
                   : MediaQuery.of(context).size.height - 90,
               child: Column(children: [
 //                Align(
@@ -59,7 +59,10 @@ class _MonoLightPageState extends State<MonoLightPage> {
 //                            ])
 //                    )),
                 SizedBox(
-                    height: MediaQuery.of(context).size.height < 600 ? 60 : 80),
+                    height: MediaQuery
+                        .of(context)
+                        .size
+                        .height < 600 ? 30 : 80),
                 SizedBox(
                     width: 320,
                     height: 320,
@@ -161,7 +164,7 @@ class _MonoLightPageState extends State<MonoLightPage> {
                                             });
                                           }))))
                         ])),
-                SizedBox(height: 12)
+                SizedBox(height: 6)
               ])),
         ));
   }

@@ -35,7 +35,6 @@ class _MyAppState extends State<MyApp> {
               localeOverrideDelegate,
               GlobalWidgetsLocalizations.delegate,
               GlobalMaterialLocalizations.delegate,
-
             ],
             supportedLocales: [
               const Locale('ru', 'RU'),

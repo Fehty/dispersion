@@ -2,7 +2,6 @@ import 'package:dispersion/constants.dart';
 import 'package:dispersion/locale/app_localization.dart';
 import 'package:dispersion/pages/info_page.dart';
 import 'package:dispersion/pages/mono_light_page.dart';
-import 'package:dispersion/pages/welcome_page.dart';
 import 'package:dispersion/pages/white_light_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -14,7 +13,9 @@ class RootPage extends StatefulWidget {
 }
 
 GlobalKey<ScaffoldState> _globalKeyScaffold = GlobalKey<ScaffoldState>();
-ValueNotifier<Widget> currentPage = ValueNotifier(MonoLightPage());
+GlobalKey currentPageKey = GlobalKey();
+ValueNotifier<Widget> currentPage =
+    ValueNotifier(MonoLightPage(key: currentPageKey));
 ValueNotifier<bool> newAppEnter = ValueNotifier(true);
 String currentLanguage = 'ru';
 ValueNotifier<String> currLang = ValueNotifier('ru');
@@ -23,7 +24,7 @@ final GlobalKey<InnerDrawerState> innerDrawerKey =
 
 //AutomaticKeepAliveClientMixin, TickerProviderStateMixin
 class _RootPage extends State<RootPage> with TickerProviderStateMixin {
-  bool _visibility = true;
+//  bool _visibility = true;
 
 //  List<bool> _selections = [true, false];
 
@@ -43,41 +44,42 @@ class _RootPage extends State<RootPage> with TickerProviderStateMixin {
           ValueListenableBuilder(
               valueListenable: currentPage,
               builder: (BuildContext context, value, Widget child) => Container(
-                    decoration: BoxDecoration(gradient: mainGradient),
-                    child: InnerDrawer(
-                        key: innerDrawerKey,
-                        onTapClose: true,
-                        proportionalChildArea: false,
+                  decoration: BoxDecoration(gradient: mainGradient),
+                  child: InnerDrawer(
+                      key: innerDrawerKey,
+                      onTapClose: true,
+                      proportionalChildArea: true,
 //                offset: IDOffset.horizontal(0.273),
 //                scale: IDOffset.horizontal(0.748),
-                        offset: IDOffset.horizontal(
-                            MediaQuery.of(context).size.height > 600
-                                ? 0.273
-                                : 0),
-                        scale: IDOffset.horizontal(0.748),
-                        backgroundColor: Colors.transparent,
-                        colorTransition: Colors.white,
+                      offset: IDOffset.only(left:
+                      MediaQuery
+                          .of(context)
+                          .size
+                          .width < 500 ? 0.273 : 0),
+                      scale: IDOffset.horizontal(0.748),
+                      backgroundColor: Colors.transparent,
+//                      colorTransition: Colors.black,
 //                      backgroundDecoration:
 //                      BoxDecoration(gradient: mainGradient),
 //                      colorTransitionChild: Colors.transparent,
-                        leftChild: LeftMenu(),
-                        boxShadow: [],
-                        borderRadius: 16,
-                        scaffold: value),
-                  )),
-          ValueListenableBuilder(
-              valueListenable: newAppEnter,
-              builder: (BuildContext context, value, Widget child) {
-                if (!value)
-                  Future.delayed(Duration(milliseconds: 600))
-                      .then((value) => setState(() => _visibility = false));
-                return Visibility(
-                    visible: _visibility,
-                    child: AnimatedOpacity(
-                        opacity: value ? 1 : 0,
-                        duration: Duration(milliseconds: 600),
-                        child: WelcomePage()));
-              })
+                      leftChild: LeftMenu(),
+//                      boxShadow: [],
+                      borderRadius: 16,
+                      scaffold: value))),
+//          ValueListenableBuilder(
+//              valueListenable: newAppEnter,
+//              builder: (BuildContext context, value, Widget child) {
+//                if (!value)
+//                  Future.delayed(Duration(milliseconds: 300))
+//                      .then((value) => _visibility = false);
+//
+//                return Visibility(
+//                    visible: _visibility,
+//                    child: AnimatedOpacity(
+//                        opacity: value ? 1 : 0,
+//                        duration: Duration(milliseconds: 300),
+//                        child: WelcomePage()));
+//              })
         ]));
   }
 }
@@ -121,6 +123,7 @@ class _LeftMenuState extends State<LeftMenu> {
                 _selections[0] = true;
                 currentLanguage = 'ru';
               });
+              currentPageKey.currentState.setState(() {});
 
 //              widget.update();
             } else if (index == 1) {
@@ -131,6 +134,7 @@ class _LeftMenuState extends State<LeftMenu> {
                 _selections[1] = true;
                 currentLanguage = 'en';
               });
+              currentPageKey.currentState.setState(() {});
 //              widget.update();
             }
           },
@@ -147,31 +151,31 @@ class _LeftMenuState extends State<LeftMenu> {
             child: Padding(
                 padding: const EdgeInsets.symmetric(vertical: 8.0),
                 child: Row(mainAxisSize: MainAxisSize.min, children: <Widget>[
-                  Padding(
-                      padding: const EdgeInsets.only(left: 24), child: icon),
+                  icon,
                   SizedBox(width: space),
                   Flexible(child: Text(text, style: leftMenuTextStyle))
                 ])));
       }
 
-      return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-        space(MediaQuery
-            .of(context)
-            .size
-            .height * 0.125),
-        Padding(
-          padding: const EdgeInsets.only(left: 24.0),
-          child: Column(
+      return Padding(
+        padding: const EdgeInsets.only(left: 24.0),
+        child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+          space(MediaQuery
+              .of(context)
+              .size
+              .height * 0.125),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               SizedBox(
                   width: MediaQuery
                       .of(context)
                       .size
-                      .height > 600 ? 170 : 240,
+                      .height > 600 ? 170 : 140,
                   height: MediaQuery
                       .of(context)
                       .size
-                      .height > 600 ? 170 : 240,
+                      .height > 600 ? 170 : 140,
                   child:
                   Image(image: AssetImage('assets/images/new_logo.png'))),
               space(),
@@ -182,70 +186,69 @@ class _LeftMenuState extends State<LeftMenu> {
                   style: leftMenuTextStyle.copyWith(fontSize: 30))
             ],
           ),
-        ),
-        space(MediaQuery
-            .of(context)
-            .size
-            .height > 600 ? 72 : 52),
-        getMenuItem(
-            onTap: () {
+          space(MediaQuery
+              .of(context)
+              .size
+              .height > 600 ? 72 : 52),
+          getMenuItem(
+              onTap: () {
 //              currentPage.value = WhiteLightPage();
 //              Navigator.of(context).push(CupertinoPageRoute<void>(
 //                  builder: (BuildContext context) => WhiteLightPage()));
-              currentPage.value = WhiteLightPage();
-              innerDrawerKey.currentState.close();
-            },
-            icon: Image(
-                image: AssetImage('assets/images/white_light.png'),
-                color: Colors.white,
-                width: 24,
-                height: 24),
-            text: AppLocalization
-                .of(context)
-                .whiteLight),
-        space(),
-        getMenuItem(
-            onTap: () {
+                currentPage.value = WhiteLightPage(key: currentPageKey);
+                innerDrawerKey.currentState.close();
+//              Future.delayed(Duration(milliseconds: 50)).then((value) => );
+
+              },
+              icon: Image(
+                  image: AssetImage('assets/images/white_light.png'),
+                  color: Colors.white,
+                  width: 24,
+                  height: 24),
+              text: AppLocalization
+                  .of(context)
+                  .whiteLight),
+          space(),
+          getMenuItem(
+              onTap: () {
 //              currentPage.value = MonoLightPage();
 //              Navigator.of(context).push(CupertinoPageRoute<void>(
 //                  builder: (BuildContext context) => MonoLightPage()));
-              currentPage.value = MonoLightPage();
-              innerDrawerKey.currentState.close();
-            },
-            icon: Image(
-                image: AssetImage('assets/images/monochromatic.png'),
-                color: Colors.white,
-                width: 27,
-                height: 27),
-            space: 13,
-            text: AppLocalization
-                .of(context)
-                .monoLight),
-        space(),
-        getMenuItem(
-            onTap: () {
+                currentPage.value = MonoLightPage(key: currentPageKey);
+                innerDrawerKey.currentState.close();
+              },
+              icon: Image(
+                  image: AssetImage('assets/images/monochromatic.png'),
+                  color: Colors.white,
+                  width: 27,
+                  height: 27),
+              space: 13,
+              text: AppLocalization
+                  .of(context)
+                  .monoLight),
+          space(),
+          getMenuItem(
+              onTap: () {
 //              Future.delayed(Duration(milliseconds: 300))
 //                  .then((value) => currentPage.value = AboutPage());
 //              Navigator.of(context).push(CupertinoPageRoute(
 //                  builder: (BuildContext context) => AboutPage()));
-              currentPage.value = InfoPage();
-              innerDrawerKey.currentState.close();
-            },
-            icon: Image(
-                image: AssetImage('assets/images/info.png'),
-                color: Colors.white,
-                width: 24,
-                height: 24),
-            text: AppLocalization
-                .of(context)
-                .info),
+                currentPage.value = InfoPage(key: currentPageKey);
+                innerDrawerKey.currentState.close();
+              },
+              icon: Image(
+                  image: AssetImage('assets/images/info.png'),
+                  color: Colors.white,
+                  width: 24,
+                  height: 24),
+              text: AppLocalization
+                  .of(context)
+                  .info),
 
-        isSmallScreen ? space(24) : Spacer(),
+          isSmallScreen ? space(24) : Spacer(),
 //        Spacer(),
-        space(24),
-        Padding(
-            padding: const EdgeInsets.only(left: 24),
-            child: localizationToggle()),
+          space(24),
+          localizationToggle(),
 //        Row(
 //          crossAxisAlignment: CrossAxisAlignment.center,
 //          children: [
@@ -254,7 +257,7 @@ class _LeftMenuState extends State<LeftMenu> {
 //
 //          ],
 //        ),
-        space(24),
+          space(24),
 //        space(MediaQuery.of(context).size.height * 0.08),
 //        if (MediaQuery.of(context).size.height > 600)
 //          Align(
@@ -262,16 +265,18 @@ class _LeftMenuState extends State<LeftMenu> {
 //              child: Padding(
 //                  padding: const EdgeInsets.only(right: 16, bottom: 16),
 //                  child: localizationToggle()))
-      ]);
+        ]),
+      );
     }
 
-    if (MediaQuery.of(context).size.height > 600)
+    if (MediaQuery
+        .of(context)
+        .size
+        .height > 600)
       return menuItems(false);
     else
-      return Padding(
-          padding: const EdgeInsets.only(left: 24.0),
-          child: SizedBox(
-              height: 800,
-              child: SingleChildScrollView(child: menuItems(true))));
+      return SizedBox(
+          height: 800,
+          child: SingleChildScrollView(child: menuItems(true)));
   }
 }
