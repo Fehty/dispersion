@@ -127,36 +127,24 @@ class _MonoLightPageState extends State<MonoLightPage> {
                         children: [
                           GradientText('λ = $_waveValue',
                               gradient: mainGradient,
-                              textStyle: Theme
-                                  .of(context)
-                                  .textTheme
-                                  .headline4),
+                              textStyle: Theme.of(context).textTheme.headline4),
                           Padding(
                               padding: const EdgeInsets.only(bottom: 2),
                               child: GradientText(
-                                  ' ${AppLocalization
-                                      .of(context)
-                                      .nm}',
+                                  ' ${AppLocalization.of(context).nm}',
                                   gradient: mainGradient,
                                   textStyle:
-                                  Theme
-                                      .of(context)
-                                      .textTheme
-                                      .headline5)),
+                                      Theme.of(context).textTheme.headline5)),
                           Spacer(),
                           SizedBox(
-                              width: MediaQuery
-                                  .of(context)
-                                  .size
-                                  .width * 0.5,
+                              width: MediaQuery.of(context).size.width * 0.5,
                               child: SliderTheme(
                                   data: SliderTheme.of(context).copyWith(
                                       trackHeight: 3.0,
                                       thumbShape: RoundSliderThumbShape(
                                           enabledThumbRadius: 12.0)),
                                   child: ShaderMask(
-                                      shaderCallback: (bounds) =>
-                                          mainGradient
+                                      shaderCallback: (bounds) => mainGradient
                                           .createShader(Rect.fromLTWH(0, 0,
                                               bounds.width, bounds.height)),
                                       child: Slider(

@@ -1,8 +1,5 @@
-import 'package:dispersion/widgets/gradient_text.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
-import '../constants.dart';
 
 class WelcomePage extends StatelessWidget {
   @override
@@ -12,14 +9,20 @@ class WelcomePage extends StatelessWidget {
         body: Center(
           child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
             SizedBox(
-                width: MediaQuery.of(context).size.height > 600 ? 220 : 240,
-                height: MediaQuery.of(context).size.height > 600 ? 220 : 240,
+                width: MediaQuery
+                    .of(context)
+                    .size
+                    .height > 600 ? 220 : 240,
+                height: MediaQuery
+                    .of(context)
+                    .size
+                    .height > 600 ? 220 : 240,
                 child: Image(image: AssetImage('assets/images/new_logo.png'))),
-            SizedBox(height: 12),
-            Flexible(
-                child: GradientText('Dispersion',
-                    textStyle: leftMenuTextStyle.copyWith(fontSize: 30),
-                    gradient: rainbowGradient))
+//            SizedBox(height: 12),
+//            Flexible(
+//                child: GradientText('Dispersion',
+//                    textStyle: leftMenuTextStyle.copyWith(fontSize: 30),
+//                    gradient: rainbowGradient))
 //          Flexible(
 //              child: Text('Дисперсия',
 //                  style: leftMenuTextStyle.copyWith(

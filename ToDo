@@ -2,12 +2,11 @@
 - change language menu attach to the left menu when landscape
 - take attention to padding
 - menu item think an appropriate name
+- drawer open resets state
+- init language earlier
 
-
-- drawer open reset state
 - change everywhere language
 
-- init language earlier
 - constant update
 - test on devices(portrait and landscape)
 

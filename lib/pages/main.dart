@@ -17,6 +17,11 @@ class _MyAppState extends State<MyApp> {
   AppLocalizationDelegate localeOverrideDelegate =
       AppLocalizationDelegate(Locale('ru', 'RU'));
 
+//  @override
+//  void initState() {
+//    AppLocalization.load(Locale('ru', 'RU'));
+//    super.initState();
+//  }
   @override
   Widget build(BuildContext context) {
     return NotificationListener<OverscrollIndicatorNotification>(
@@ -27,9 +32,10 @@ class _MyAppState extends State<MyApp> {
         child: MaterialApp(
             title: 'Dispersion',
             localizationsDelegates: [
-              GlobalMaterialLocalizations.delegate,
+              localeOverrideDelegate,
               GlobalWidgetsLocalizations.delegate,
-              localeOverrideDelegate
+              GlobalMaterialLocalizations.delegate,
+
             ],
             supportedLocales: [
               const Locale('ru', 'RU'),

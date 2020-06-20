@@ -21,15 +21,19 @@ ValueNotifier<String> currLang = ValueNotifier('ru');
 final GlobalKey<InnerDrawerState> innerDrawerKey =
     GlobalKey<InnerDrawerState>();
 
-class _RootPage extends State<RootPage> with SingleTickerProviderStateMixin {
+//AutomaticKeepAliveClientMixin, TickerProviderStateMixin
+class _RootPage extends State<RootPage> with TickerProviderStateMixin {
   bool _visibility = true;
-  List<bool> _selections = [true, false];
 
-  @override
-  void initState() {
-    AppLocalization.load(Locale('ru', 'RU'));
-    super.initState();
-  }
+//  List<bool> _selections = [true, false];
+
+//  @override
+//  void initState() {
+//    setState(() {
+//      AppLocalization.load(Locale('ru', 'RU'));
+//    });
+//    super.initState();
+//  }
 
   @override
   Widget build(BuildContext context) {
@@ -38,28 +42,29 @@ class _RootPage extends State<RootPage> with SingleTickerProviderStateMixin {
         body: Stack(children: [
           ValueListenableBuilder(
               valueListenable: currentPage,
-              builder: (BuildContext context, value, Widget child) =>
-                  InnerDrawer(
-                      key: innerDrawerKey,
-                      onTapClose: true,
-                      proportionalChildArea: false,
+              builder: (BuildContext context, value, Widget child) => Container(
+                    decoration: BoxDecoration(gradient: mainGradient),
+                    child: InnerDrawer(
+                        key: innerDrawerKey,
+                        onTapClose: true,
+                        proportionalChildArea: false,
 //                offset: IDOffset.horizontal(0.273),
 //                scale: IDOffset.horizontal(0.748),
-                      offset: IDOffset.horizontal(
-                          MediaQuery
-                              .of(context)
-                              .size
-                              .height > 600
-                              ? 0.273
-                              : 0),
-                      scale: IDOffset.horizontal(0.748),
-                      backgroundDecoration:
-                      BoxDecoration(gradient: mainGradient),
-                      colorTransitionChild: Colors.transparent,
-                      leftChild: LeftMenu(),
-                      boxShadow: [],
-                      borderRadius: 16,
-                      scaffold: value)),
+                        offset: IDOffset.horizontal(
+                            MediaQuery.of(context).size.height > 600
+                                ? 0.273
+                                : 0),
+                        scale: IDOffset.horizontal(0.748),
+                        backgroundColor: Colors.transparent,
+                        colorTransition: Colors.white,
+//                      backgroundDecoration:
+//                      BoxDecoration(gradient: mainGradient),
+//                      colorTransitionChild: Colors.transparent,
+                        leftChild: LeftMenu(),
+                        boxShadow: [],
+                        borderRadius: 16,
+                        scaffold: value),
+                  )),
           ValueListenableBuilder(
               valueListenable: newAppEnter,
               builder: (BuildContext context, value, Widget child) {
@@ -78,16 +83,25 @@ class _RootPage extends State<RootPage> with SingleTickerProviderStateMixin {
 }
 
 class LeftMenu extends StatefulWidget {
-
   @override
   _LeftMenuState createState() => _LeftMenuState();
 }
 
 class _LeftMenuState extends State<LeftMenu> {
   space([double space = 8]) => SizedBox(height: space);
-  List<bool> _selections = [true, false];
+  List<bool> _selections;
 
 //  bool isSelected;
+
+  @override
+  void initState() {
+    if (currentLanguage == 'ru')
+      _selections = [true, false];
+    else
+      _selections = [false, true];
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     Widget localizationToggle() {
@@ -139,6 +153,7 @@ class _LeftMenuState extends State<LeftMenu> {
                   Flexible(child: Text(text, style: leftMenuTextStyle))
                 ])));
       }
+
       return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
         space(MediaQuery
             .of(context)
