@@ -54,7 +54,7 @@ flutter:
     - assets/res/
 
 flutter_native_splash:
-  image: assets/images/new_logo.png
+  image: assets/images/logo.png
   color: 4E85AC
 
 

@@ -6,10 +6,9 @@
 - init language earlier
 - change everywhere language
 - constant update
-
 - rename assets files
+
 - test on devices(portrait and landscape)
 
-
-+- White color light animation
 +- Perpendicular continuation
++- White color light animation

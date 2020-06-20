@@ -9,15 +9,9 @@ class WelcomePage extends StatelessWidget {
         body: Center(
           child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
             SizedBox(
-                width: MediaQuery
-                    .of(context)
-                    .size
-                    .height > 600 ? 220 : 240,
-                height: MediaQuery
-                    .of(context)
-                    .size
-                    .height > 600 ? 220 : 240,
-                child: Image(image: AssetImage('assets/images/new_logo.png'))),
+                width: MediaQuery.of(context).size.height > 600 ? 220 : 240,
+                height: MediaQuery.of(context).size.height > 600 ? 220 : 240,
+                child: Image(image: AssetImage('assets/images/logo.png'))),
 //            SizedBox(height: 12),
 //            Flexible(
 //                child: GradientText('Dispersion',
