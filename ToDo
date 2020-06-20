@@ -3,8 +3,12 @@
 - take attention to padding
 - menu item think an appropriate name
 
-- constant update
+
 - drawer open reset state
+- change everywhere language
+
+- init language earlier
+- constant update
 - test on devices(portrait and landscape)
 
 

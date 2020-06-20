@@ -57,10 +57,7 @@ class _WhiteLightPageState extends State<WhiteLightPage> {
 //                              ]))),
                   SizedBox(
                       height:
-                      MediaQuery
-                          .of(context)
-                          .size
-                          .height < 600 ? 60 : 135),
+                          MediaQuery.of(context).size.height < 600 ? 60 : 135),
                   SizedBox(
                       width: 320,
                       height: 320,
@@ -71,18 +68,12 @@ class _WhiteLightPageState extends State<WhiteLightPage> {
                       alignment: Alignment.center,
                       child: GradientText('α = $_angleValue°',
                           gradient: mainGradient,
-                          textStyle: Theme
-                              .of(context)
-                              .textTheme
-                              .headline4)),
+                          textStyle: Theme.of(context).textTheme.headline4)),
 //                  SizedBox(height: 6),
                   Align(
                     alignment: Alignment.center,
                     child: SizedBox(
-                        width: MediaQuery
-                            .of(context)
-                            .size
-                            .width * 0.9,
+                        width: MediaQuery.of(context).size.width * 0.9,
                         child: SliderTheme(
                             data: SliderTheme.of(context).copyWith(
                                 trackHeight: 3.0,

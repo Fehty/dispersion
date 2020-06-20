@@ -10,20 +10,21 @@ class WelcomePage extends StatelessWidget {
     return Scaffold(
         backgroundColor: Colors.white,
         body: Center(
-            child:
-                Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-          AspectRatio(
-              aspectRatio: 1.7,
-              child: Image(image: AssetImage('assets/images/new_logo.png'))),
-          SizedBox(height: 12),
-          Flexible(
-              child: GradientText('Dispersion',
-                  textStyle: leftMenuTextStyle.copyWith(fontSize: 30),
-                  gradient: rainbowGradient))
+          child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+            SizedBox(
+                width: MediaQuery.of(context).size.height > 600 ? 220 : 240,
+                height: MediaQuery.of(context).size.height > 600 ? 220 : 240,
+                child: Image(image: AssetImage('assets/images/new_logo.png'))),
+            SizedBox(height: 12),
+            Flexible(
+                child: GradientText('Dispersion',
+                    textStyle: leftMenuTextStyle.copyWith(fontSize: 30),
+                    gradient: rainbowGradient))
 //          Flexible(
 //              child: Text('Дисперсия',
 //                  style: leftMenuTextStyle.copyWith(
 //                      fontSize: 30, color: Colors.black)))
-        ])));
+          ]),
+        ));
   }
 }

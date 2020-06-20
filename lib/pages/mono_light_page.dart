@@ -28,7 +28,9 @@ class _MonoLightPageState extends State<MonoLightPage> {
                 backgroundColor: Color.fromRGBO(78, 133, 172, 1),
                 leading: IconButton(
                     icon: const Icon(Icons.menu),
-                    onPressed: () => innerDrawerKey.currentState.open()),
+                    onPressed: () {
+                      innerDrawerKey.currentState.open();
+                    }),
                 title: Text(AppLocalization.of(context).fullMonoLight))),
         body: SingleChildScrollView(
           padding: const EdgeInsets.all(0),
@@ -125,7 +127,10 @@ class _MonoLightPageState extends State<MonoLightPage> {
                         children: [
                           GradientText('λ = $_waveValue',
                               gradient: mainGradient,
-                              textStyle: Theme.of(context).textTheme.headline4),
+                              textStyle: Theme
+                                  .of(context)
+                                  .textTheme
+                                  .headline4),
                           Padding(
                               padding: const EdgeInsets.only(bottom: 2),
                               child: GradientText(
@@ -140,14 +145,18 @@ class _MonoLightPageState extends State<MonoLightPage> {
                                       .headline5)),
                           Spacer(),
                           SizedBox(
-                              width: MediaQuery.of(context).size.width * 0.5,
+                              width: MediaQuery
+                                  .of(context)
+                                  .size
+                                  .width * 0.5,
                               child: SliderTheme(
                                   data: SliderTheme.of(context).copyWith(
                                       trackHeight: 3.0,
                                       thumbShape: RoundSliderThumbShape(
                                           enabledThumbRadius: 12.0)),
                                   child: ShaderMask(
-                                      shaderCallback: (bounds) => mainGradient
+                                      shaderCallback: (bounds) =>
+                                          mainGradient
                                           .createShader(Rect.fromLTWH(0, 0,
                                               bounds.width, bounds.height)),
                                       child: Slider(

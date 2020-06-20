@@ -17,10 +17,11 @@ GlobalKey<ScaffoldState> _globalKeyScaffold = GlobalKey<ScaffoldState>();
 ValueNotifier<Widget> currentPage = ValueNotifier(MonoLightPage());
 ValueNotifier<bool> newAppEnter = ValueNotifier(true);
 String currentLanguage = 'ru';
+ValueNotifier<String> currLang = ValueNotifier('ru');
 final GlobalKey<InnerDrawerState> innerDrawerKey =
     GlobalKey<InnerDrawerState>();
 
-class _RootPage extends State<RootPage> {
+class _RootPage extends State<RootPage> with SingleTickerProviderStateMixin {
   bool _visibility = true;
   List<bool> _selections = [true, false];
 
@@ -34,48 +35,50 @@ class _RootPage extends State<RootPage> {
   Widget build(BuildContext context) {
     return Scaffold(
         key: _globalKeyScaffold,
-        body: Container(
-            color: Colors.red,
-            child: Stack(children: [
-              ValueListenableBuilder(
-                  valueListenable: currentPage,
-                  builder: (BuildContext context, value, Widget child) =>
-                      InnerDrawer(
-                          key: innerDrawerKey,
-                          onTapClose: true,
-                          proportionalChildArea: false,
+        body: Stack(children: [
+          ValueListenableBuilder(
+              valueListenable: currentPage,
+              builder: (BuildContext context, value, Widget child) =>
+                  InnerDrawer(
+                      key: innerDrawerKey,
+                      onTapClose: true,
+                      proportionalChildArea: false,
 //                offset: IDOffset.horizontal(0.273),
 //                scale: IDOffset.horizontal(0.748),
-                          offset: IDOffset.horizontal(
-                              MediaQuery.of(context).size.height > 600
-                                  ? 0.273
-                                  : 0),
-                          scale: IDOffset.horizontal(0.748),
-                          backgroundDecoration:
-                              BoxDecoration(gradient: mainGradient),
-                          colorTransitionChild: Colors.transparent,
-                          leftChild: LeftMenu(),
-                          boxShadow: [],
-                          borderRadius: 16,
-                          scaffold: value)),
-              ValueListenableBuilder(
-                  valueListenable: newAppEnter,
-                  builder: (BuildContext context, value, Widget child) {
-                    if (!value)
-                      Future.delayed(Duration(milliseconds: 600))
-                          .then((value) => setState(() => _visibility = false));
-                    return Visibility(
-                        visible: _visibility,
-                        child: AnimatedOpacity(
-                            opacity: value ? 1 : 0,
-                            duration: Duration(milliseconds: 600),
-                            child: WelcomePage()));
-                  })
-            ])));
+                      offset: IDOffset.horizontal(
+                          MediaQuery
+                              .of(context)
+                              .size
+                              .height > 600
+                              ? 0.273
+                              : 0),
+                      scale: IDOffset.horizontal(0.748),
+                      backgroundDecoration:
+                      BoxDecoration(gradient: mainGradient),
+                      colorTransitionChild: Colors.transparent,
+                      leftChild: LeftMenu(),
+                      boxShadow: [],
+                      borderRadius: 16,
+                      scaffold: value)),
+          ValueListenableBuilder(
+              valueListenable: newAppEnter,
+              builder: (BuildContext context, value, Widget child) {
+                if (!value)
+                  Future.delayed(Duration(milliseconds: 600))
+                      .then((value) => setState(() => _visibility = false));
+                return Visibility(
+                    visible: _visibility,
+                    child: AnimatedOpacity(
+                        opacity: value ? 1 : 0,
+                        duration: Duration(milliseconds: 600),
+                        child: WelcomePage()));
+              })
+        ]));
   }
 }
 
 class LeftMenu extends StatefulWidget {
+
   @override
   _LeftMenuState createState() => _LeftMenuState();
 }
@@ -97,19 +100,24 @@ class _LeftMenuState extends State<LeftMenu> {
           borderWidth: 1.5,
           onPressed: (int index) {
             if (index == 0) {
+//              currLang.value = 'ru';
               setState(() {
                 AppLocalization.load(Locale('ru', 'RU'));
                 _selections[1] = false;
                 _selections[0] = true;
                 currentLanguage = 'ru';
               });
+
+//              widget.update();
             } else if (index == 1) {
+//              currLang.value = 'en';
               setState(() {
                 AppLocalization.load(Locale('en', 'US'));
                 _selections[0] = false;
                 _selections[1] = true;
                 currentLanguage = 'en';
               });
+//              widget.update();
             }
           },
           isSelected: _selections);
@@ -166,9 +174,11 @@ class _LeftMenuState extends State<LeftMenu> {
             .height > 600 ? 72 : 52),
         getMenuItem(
             onTap: () {
+//              currentPage.value = WhiteLightPage();
+//              Navigator.of(context).push(CupertinoPageRoute<void>(
+//                  builder: (BuildContext context) => WhiteLightPage()));
               currentPage.value = WhiteLightPage();
-              Navigator.of(context).push(CupertinoPageRoute<void>(
-                  builder: (BuildContext context) => WhiteLightPage()));
+              innerDrawerKey.currentState.close();
             },
             icon: Image(
                 image: AssetImage('assets/images/white_light.png'),
@@ -181,9 +191,11 @@ class _LeftMenuState extends State<LeftMenu> {
         space(),
         getMenuItem(
             onTap: () {
+//              currentPage.value = MonoLightPage();
+//              Navigator.of(context).push(CupertinoPageRoute<void>(
+//                  builder: (BuildContext context) => MonoLightPage()));
               currentPage.value = MonoLightPage();
-              Navigator.of(context).push(CupertinoPageRoute<void>(
-                  builder: (BuildContext context) => MonoLightPage()));
+              innerDrawerKey.currentState.close();
             },
             icon: Image(
                 image: AssetImage('assets/images/monochromatic.png'),
@@ -197,10 +209,12 @@ class _LeftMenuState extends State<LeftMenu> {
         space(),
         getMenuItem(
             onTap: () {
-              Future.delayed(Duration(milliseconds: 300))
-                  .then((value) => currentPage.value = AboutPage());
-              Navigator.of(context).push(CupertinoPageRoute(
-                  builder: (BuildContext context) => AboutPage()));
+//              Future.delayed(Duration(milliseconds: 300))
+//                  .then((value) => currentPage.value = AboutPage());
+//              Navigator.of(context).push(CupertinoPageRoute(
+//                  builder: (BuildContext context) => AboutPage()));
+              currentPage.value = InfoPage();
+              innerDrawerKey.currentState.close();
             },
             icon: Image(
                 image: AssetImage('assets/images/info.png'),
