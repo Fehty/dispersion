@@ -36,25 +36,6 @@ class _WhiteLightPageState extends State<WhiteLightPage> {
                     ? 500
                     : MediaQuery.of(context).size.height - 90,
                 child: Column(children: [
-//                  Align(
-//                      alignment: Alignment.topLeft,
-//                      child: Padding(
-//                          padding: const EdgeInsets.only(left: 16, top: 54),
-//                          child: Column(
-//                              crossAxisAlignment: CrossAxisAlignment.start,
-//                              children: [
-//                                GradientText('Белое излучение',
-//                                    gradient: mainGradient,
-//                                    textStyle:
-//                                        Theme.of(context).textTheme.headline4),
-////                                GradientText('излучение',
-////                                    gradient: mainGradient,
-////                                    textStyle:
-////                                    Theme
-////                                        .of(context)
-////                                        .textTheme
-////                                        .headline4)
-//                              ]))),
                   SizedBox(
                       height:
                           MediaQuery.of(context).size.height < 600 ? 60 : 135),
@@ -69,68 +50,32 @@ class _WhiteLightPageState extends State<WhiteLightPage> {
                       child: GradientText('α = $_angleValue°',
                           gradient: mainGradient,
                           textStyle: Theme.of(context).textTheme.headline4)),
-//                  SizedBox(height: 6),
                   Align(
-                    alignment: Alignment.center,
-                    child: SizedBox(
-                        width: MediaQuery.of(context).size.width * 0.9,
-                        child: SliderTheme(
-                            data: SliderTheme.of(context).copyWith(
-                                trackHeight: 3.0,
-                                thumbShape: RoundSliderThumbShape(
-                                    enabledThumbRadius: 12.0)),
-                            child: ShaderMask(
-                                shaderCallback: (bounds) =>
-                                    mainGradient.createShader(Rect.fromLTWH(
-                                        0, 0, bounds.width, bounds.height)),
-                                child: Slider(
-                                    value: _angleSliderValue,
-                                    activeColor: Colors.white,
-                                    inactiveColor:
-                                    Color.fromRGBO(138, 171, 193, 0.4),
-                                    onChanged: (double value) {
-                                      setState(() {
-                                        _angleSliderValue = value;
-                                        _angleValue =
-                                            (_angleSliderValue * 30 + 20)
-                                                .toInt();
-                                      });
-                                    })))),
-                  ),
-//                  Padding(
-//                      padding: const EdgeInsets.only(left: 16),
-//                      child: Row(children: [
-//                        GradientText('α = $_angleValue°',
-//                            gradient: mainGradient,
-//                            textStyle: Theme.of(context).textTheme.headline4),
-//                        Spacer(),
-//                        SizedBox(
-//                            width: MediaQuery.of(context).size.height < 600
-//                                ? MediaQuery.of(context).size.width * 0.75
-//                                : MediaQuery.of(context).size.width * 0.5,
-//                            child: SliderTheme(
-//                                data: SliderTheme.of(context).copyWith(
-//                                    trackHeight: 3.0,
-//                                    thumbShape: RoundSliderThumbShape(
-//                                        enabledThumbRadius: 12.0)),
-//                                child: ShaderMask(
-//                                    shaderCallback: (bounds) =>
-//                                        mainGradient.createShader(Rect.fromLTWH(
-//                                            0, 0, bounds.width, bounds.height)),
-//                                    child: Slider(
-//                                        value: _angleSliderValue,
-//                                        activeColor: Colors.white,
-//                                        inactiveColor:
-//                                            Color.fromRGBO(138, 171, 193, 0.4),
-//                                        onChanged: (double value) {
-//                                          setState(() {
-//                                            _angleSliderValue = value;
-//                                            _angleValue =
-//                                                (_angleSliderValue * 30 + 20)
-//                                                    .toInt();
-//                                          });
-//                                        }))))
-//                      ])),
+                      alignment: Alignment.center,
+                      child: SizedBox(
+                          width: MediaQuery.of(context).size.width * 0.9,
+                          child: SliderTheme(
+                              data: SliderTheme.of(context).copyWith(
+                                  trackHeight: 3.0,
+                                  thumbShape: RoundSliderThumbShape(
+                                      enabledThumbRadius: 12.0)),
+                              child: ShaderMask(
+                                  shaderCallback: (bounds) =>
+                                      mainGradient.createShader(Rect.fromLTWH(
+                                          0, 0, bounds.width, bounds.height)),
+                                  child: Slider(
+                                      value: _angleSliderValue,
+                                      activeColor: Colors.white,
+                                      inactiveColor:
+                                          Color.fromRGBO(138, 171, 193, 0.4),
+                                      onChanged: (double value) {
+                                        setState(() {
+                                          _angleSliderValue = value;
+                                          _angleValue =
+                                              (_angleSliderValue * 30 + 20)
+                                                  .toInt();
+                                        });
+                                      }))))),
                   SizedBox(height: 6)
                 ]))));
   }
@@ -152,39 +97,10 @@ class MyPainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-//    if (newAppEnter.value) {
-//      innerDrawerKey.currentState.open();
-//      Future.delayed(Duration(milliseconds: 900))
-//          .then((value) => newAppEnter.value = false);
-//    }
     _firstLinePaint
       ..style = PaintingStyle.stroke
       ..strokeWidth = 2
       ..color = Colors.white;
-
-//    _mainLinePaint
-//      ..style = PaintingStyle.stroke
-//      ..strokeWidth = 3.5
-//      ..color = waveValue > 625 || waveValue == 625
-//          ? Colors.red
-//          : waveValue < 625 && waveValue > 590 || waveValue == 590
-//          ? Colors.orange
-//          : waveValue < 590 && waveValue > 565 || waveValue == 565
-//          ? Colors.yellow
-//          : waveValue < 565 && waveValue > 540 || waveValue == 540
-//          ? Colors.lightGreen
-//          : waveValue < 540 && waveValue > 500 || waveValue == 500
-//          ? Colors.green
-//          : waveValue < 500 && waveValue > 485 ||
-//          waveValue == 485
-//          ? Colors.blue
-//          : waveValue < 485 && waveValue > 440 ||
-//          waveValue == 440
-//          ? Color.fromRGBO(0, 0, 240, 1)
-//          : waveValue < 440 && waveValue > 380 ||
-//          waveValue == 380
-//          ? Color.fromRGBO(102, 0, 204, 1)
-//          : Colors.blue;
     _perpendicularLinePaint
       ..style = PaintingStyle.stroke
       ..strokeWidth = 2
@@ -211,7 +127,6 @@ class MyPainter extends CustomPainter {
   }
 
   void drawTriangle(Canvas canvas, Size size) {
-//    double widthCalcValue = angleSliderValue * 106;
     final rect = Rect.fromLTWH(0.0, 0.0, size.width, size.height);
     final trianglePaint = Paint()
       ..shader = mainGradient.createShader(rect);
@@ -240,7 +155,6 @@ class MyPainter extends CustomPainter {
   }
 
   void drawFirstLine(Canvas canvas, Size size) {
-//    double widthCalcValue = angleSliderValue * 100;
     double x1 = size.width / 3 - _secondWidthCalc;
 
     canvas.drawLine(Offset(-250, size.height),
@@ -248,7 +162,6 @@ class MyPainter extends CustomPainter {
   }
 
   void drawFirstLinePerpendicular(Canvas canvas, Size size) {
-//    double widthCalcValue = angleSliderValue * 100;
     double x0 = (size.width / 3 - _secondWidthCalc + 160) / 2;
     double y0 = size.height / 2;
     double xa = size.width / 3 - _secondWidthCalc;
@@ -271,7 +184,6 @@ class MyPainter extends CustomPainter {
     final angleArc = Path();
     angleArc.moveTo(xAngle, unknownY(xAngle));
     angleArc.arcToPoint(
-//        Offset(xAngle, unknownY(xAngle) + 44 - angleSliderValue * 19),
         Offset(
             xAngle,
             linearEquationGetY(
@@ -310,7 +222,6 @@ class MyPainter extends CustomPainter {
       ..strokeWidth = 3
       ..color = Colors.white;
 
-//    double widthCalcValue = angleSliderValue * 100;
     double x0 = (size.width / 3 - _secondWidthCalc + 160) / 2;
     double y0 = size.height / 2;
 
@@ -369,7 +280,6 @@ class MyPainter extends CustomPainter {
       ..style = PaintingStyle.stroke
       ..strokeWidth = 0.3
       ..color = Colors.purple;
-//    double widthCalcValue = angleSliderValue * 100;
     double x1 = size.width / 3 - _secondWidthCalc;
     double x2 = size.width - size.width / 3 + _secondWidthCalc - 5;
     middleLine1.moveTo((x1 + 160) / 2, size.height / 2);
@@ -382,7 +292,6 @@ class MyPainter extends CustomPainter {
       ..style = PaintingStyle.stroke
       ..strokeWidth = 0.3
       ..color = Colors.red;
-//    double widthCalcValue2 = angleSliderValue * 100;
     middleLine2.moveTo((x1 + 160) / 2, size.height / 2);
     middleLine2.lineTo(
         (x2 + 160) / 2 - angleSliderValue * 2, size.height / 2 - 16.5);
@@ -393,7 +302,6 @@ class MyPainter extends CustomPainter {
       ..style = PaintingStyle.stroke
       ..strokeWidth = 0.3
       ..color = Colors.orange;
-//    double widthCalcValue2 = angleSliderValue * 100;
     middleLine3.moveTo((x1 + 160) / 2, size.height / 2);
     middleLine3.lineTo(
         (x2 + 160) / 2 - angleSliderValue * 2, size.height / 2 - 16);
@@ -401,7 +309,6 @@ class MyPainter extends CustomPainter {
   }
 
   void drawThirdLine(Canvas canvas, Size size) {
-//    double widthCalcValue = angleSliderValue * 100;
     double x2 = size.width - size.width / 3 + _secondWidthCalc;
 
     final redLine = Path();

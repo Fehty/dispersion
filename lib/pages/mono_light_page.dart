@@ -41,28 +41,8 @@ class _MonoLightPageState extends State<MonoLightPage> {
                   ? 530
                   : MediaQuery.of(context).size.height - 90,
               child: Column(children: [
-//                Align(
-//                    alignment: Alignment.topLeft,
-//                    child: Padding(
-//                        padding: const EdgeInsets.only(left: 16, top: 54),
-//                        child: Column(
-//                            crossAxisAlignment: CrossAxisAlignment.start,
-//                            children: [
-//                              GradientText('Монохромное',
-//                                  gradient: mainGradient,
-//                                  textStyle:
-//                                      Theme.of(context).textTheme.headline4),
-//                              GradientText('излучение',
-//                                  gradient: mainGradient,
-//                                  textStyle:
-//                                      Theme.of(context).textTheme.headline4)
-//                            ])
-//                    )),
                 SizedBox(
-                    height: MediaQuery
-                        .of(context)
-                        .size
-                        .height < 600 ? 30 : 80),
+                    height: MediaQuery.of(context).size.height < 600 ? 30 : 80),
                 SizedBox(
                     width: 320,
                     height: 320,
@@ -75,22 +55,17 @@ class _MonoLightPageState extends State<MonoLightPage> {
                     child: Align(
                         alignment: Alignment.centerLeft,
                         child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.end,
-                          children: [
-                            GradientText('n',
-                                gradient: mainGradient,
-                                textStyle:
-                                    Theme.of(context).textTheme.headline4),
-//                              GradientText('стекла',
-//                                  gradient: mainGradient,
-//                                  textStyle:
-//                                  Theme.of(context).textTheme.bodyText1),
-                            GradientText(' = 1.63',
-                                gradient: mainGradient,
-                                textStyle:
-                                    Theme.of(context).textTheme.headline4),
-                          ],
-                        ))),
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            children: [
+                              GradientText('n',
+                                  gradient: mainGradient,
+                                  textStyle:
+                                      Theme.of(context).textTheme.headline4),
+                              GradientText(' = 1.63',
+                                  gradient: mainGradient,
+                                  textStyle:
+                                      Theme.of(context).textTheme.headline4)
+                            ]))),
                 Padding(
                     padding: const EdgeInsets.only(left: 16),
                     child: Row(children: [
@@ -244,14 +219,11 @@ class MyPainter extends CustomPainter {
   }
 
   void drawTriangle(Canvas canvas, Size size) {
-//    double widthCalcValue = 38;
-//    double widthCalcValue = angleSliderValue * 106;
     final rect = Rect.fromLTWH(0.0, 0.0, size.width, size.height);
     final trianglePaint = Paint()
       ..shader = mainGradient.createShader(rect);
     var trianglePath = Path();
     trianglePath.moveTo(size.width / 2, 0);
-    //37
     trianglePath.lineTo(size.width / 3 - _firstWidthCalc, size.height);
     trianglePath.lineTo(
         size.width - size.width / 3 + _firstWidthCalc, size.height);
@@ -275,7 +247,6 @@ class MyPainter extends CustomPainter {
   }
 
   void drawFirstLine(Canvas canvas, Size size) {
-//    double widthCalcValue = angleSliderValue * 100;
     double x1 = size.width / 3 - _secondWidthCalc;
 
     canvas.drawLine(Offset(-250, size.height),
@@ -283,7 +254,6 @@ class MyPainter extends CustomPainter {
   }
 
   void drawFirstLinePerpendicular(Canvas canvas, Size size) {
-//    double widthCalcValue = angleSliderValue * 100;
     double x0 = (size.width / 3 - _secondWidthCalc + 160) / 2;
     double y0 = size.height / 2;
     double xa = size.width / 3 - _secondWidthCalc;
@@ -310,7 +280,6 @@ class MyPainter extends CustomPainter {
             xAngle,
             linearEquationGetY(
                 LinearPoints(-250, size.height, x0, y0), xAngle)),
-//        Offset(xAngle, unknownY(xAngle) + 44 - angleSliderValue * 19),
         clockwise: false,
         radius: Radius.circular(30));
     final anglePaint = Paint()
@@ -341,7 +310,6 @@ class MyPainter extends CustomPainter {
 
   void drawMiddleLine(Canvas canvas, Size size) {
     final middleLine = Path();
-//    double widthCalcValue = angleSliderValue * 100;
     double x1 = size.width / 3 - _secondWidthCalc;
     double x2 = size.width - size.width / 3 + _secondWidthCalc;
     middleLine.moveTo((x1 + 160) / 2, size.height / 2);
@@ -351,7 +319,6 @@ class MyPainter extends CustomPainter {
 
   void drawThirdLine(Canvas canvas, Size size) {
     final thirdLine = Path();
-//    double widthCalcValue = angleSliderValue * 100;
     double x1 = size.width - size.width / 3 + _secondWidthCalc;
     thirdLine.moveTo((x1 + 160) / 2, size.height / 2 - 10.5);
     thirdLine.lineTo(
@@ -362,15 +329,10 @@ class MyPainter extends CustomPainter {
             100 +
             25 -
             waveSliderValue * 25);
-//    thirdLine.lineTo(
-//        1000,
-//       200);
-//               -80 + angleSliderValue * 330 + 25 - waveSliderValue * 25);
     canvas.drawPath(thirdLine, _mainLinePaint);
   }
 
   void drawThirdLinePerpendicular(Canvas canvas, Size size) {
-//    double widthCalcValue = angleSliderValue * 100;
     double x0 = (size.width - size.width / 3 + _secondWidthCalc + 160) / 2;
     double y0 = size.height / 2 - 10.5;
     double xa = size.width - size.width / 3 + _secondWidthCalc;
@@ -421,10 +383,6 @@ class MyPainter extends CustomPainter {
     perpendicularRectangle.lineTo(x0 - 6 - 6 * angleSliderValue,
         unknownY(x0) - 21.5 - angleSliderValue * -1);
     canvas.drawPath(perpendicularRectangle, _perpendicularRectanglePaint);
-
-//    double secondAngle = secondAngleData[angleValue];
-//    double secondAngle = (1.63 * angleValue - firstAngleData[angleValue]) + 1.5 - waveSliderValue*1.5 - (50 - angleValue);
-//    double secondAngle = 1.5 - waveSliderValue * 1.5 - (50 - angleValue);
 
     final textPainter = TextPainter(
         text: TextSpan(

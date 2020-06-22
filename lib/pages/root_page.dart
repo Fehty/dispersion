@@ -22,20 +22,7 @@ ValueNotifier<String> currLang = ValueNotifier('ru');
 final GlobalKey<InnerDrawerState> innerDrawerKey =
     GlobalKey<InnerDrawerState>();
 
-//AutomaticKeepAliveClientMixin, TickerProviderStateMixin
 class _RootPage extends State<RootPage> with TickerProviderStateMixin {
-//  bool _visibility = true;
-
-//  List<bool> _selections = [true, false];
-
-//  @override
-//  void initState() {
-//    setState(() {
-//      AppLocalization.load(Locale('ru', 'RU'));
-//    });
-//    super.initState();
-//  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -55,34 +42,14 @@ class _RootPage extends State<RootPage> with TickerProviderStateMixin {
                           left: MediaQuery.of(context).size.width < 500
                               ? 0.273
                               : 0),
-//                      scale: IDOffset.horizontal(0.748),
                       scale: IDOffset.horizontal(
                           MediaQuery.of(context).size.height > 600
                               ? 0.75
                               : 0.8),
                       backgroundColor: Colors.transparent,
-//                      colorTransition: Colors.black,
-//                      backgroundDecoration:
-//                      BoxDecoration(gradient: mainGradient),
-//                      colorTransitionChild: Colors.transparent,
                       leftChild: LeftMenu(),
-//                      boxShadow: [],
                       borderRadius: 16,
-                      scaffold: value))),
-//          ValueListenableBuilder(
-//              valueListenable: newAppEnter,
-//              builder: (BuildContext context, value, Widget child) {
-//                if (!value)
-//                  Future.delayed(Duration(milliseconds: 300))
-//                      .then((value) => _visibility = false);
-//
-//                return Visibility(
-//                    visible: _visibility,
-//                    child: AnimatedOpacity(
-//                        opacity: value ? 1 : 0,
-//                        duration: Duration(milliseconds: 300),
-//                        child: WelcomePage()));
-//              })
+                      scaffold: value)))
         ]));
   }
 }
@@ -95,8 +62,6 @@ class LeftMenu extends StatefulWidget {
 class _LeftMenuState extends State<LeftMenu> {
   space([double space = 8]) => SizedBox(height: space);
   List<bool> _selections;
-
-//  bool isSelected;
 
   @override
   void initState() {
@@ -119,7 +84,6 @@ class _LeftMenuState extends State<LeftMenu> {
           borderWidth: 1.5,
           onPressed: (int index) {
             if (index == 0) {
-//              currLang.value = 'ru';
               setState(() {
                 AppLocalization.load(Locale('ru', 'RU'));
                 _selections[1] = false;
@@ -127,10 +91,7 @@ class _LeftMenuState extends State<LeftMenu> {
                 currentLanguage = 'ru';
               });
               currentPageKey.currentState.setState(() {});
-
-//              widget.update();
             } else if (index == 1) {
-//              currLang.value = 'en';
               setState(() {
                 AppLocalization.load(Locale('en', 'US'));
                 _selections[0] = false;
@@ -138,7 +99,6 @@ class _LeftMenuState extends State<LeftMenu> {
                 currentLanguage = 'en';
               });
               currentPageKey.currentState.setState(() {});
-//              widget.update();
             }
           },
           isSelected: _selections);
@@ -168,52 +128,52 @@ class _LeftMenuState extends State<LeftMenu> {
                             ])))));
       }
 
-      return Column(crossAxisAlignment: MediaQuery
-          .of(context)
-          .size
-          .height > 600 ? CrossAxisAlignment.start : CrossAxisAlignment.center,
+      return Column(
+          crossAxisAlignment: MediaQuery
+              .of(context)
+              .size
+              .height > 600
+              ? CrossAxisAlignment.start
+              : CrossAxisAlignment.center,
           children: [
             space(MediaQuery
                 .of(context)
                 .size
                 .height * 0.125),
             Padding(
-              padding: const EdgeInsets.only(left: 24.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  SizedBox(
-                      width: MediaQuery
+                padding: const EdgeInsets.only(left: 24.0),
+                child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      SizedBox(
+                          width: MediaQuery
+                              .of(context)
+                              .size
+                              .height > 600
+                              ? 170
+                              : 140,
+                          height: MediaQuery
+                              .of(context)
+                              .size
+                              .height > 600
+                              ? 170
+                              : 140,
+                          child: Image(
+                              image: AssetImage('assets/images/logo.png'))),
+                      space(),
+                      Text(AppLocalization
                           .of(context)
-                          .size
-                          .height > 600 ? 170 : 140,
-                      height: MediaQuery
-                          .of(context)
-                          .size
-                          .height > 600 ? 170 : 140,
-                      child: Image(
-                          image: AssetImage('assets/images/logo.png'))),
-                  space(),
-//        Text('Дисперсия', style: leftMenuTextStyle.copyWith(fontSize: 30)),
-                  Text(AppLocalization
-                      .of(context)
-                      .appName,
-                      style: leftMenuTextStyle.copyWith(fontSize: 30))
-                ],
-              ),
-            ),
+                          .appName,
+                          style: leftMenuTextStyle.copyWith(fontSize: 30))
+                    ])),
             space(MediaQuery
                 .of(context)
                 .size
                 .height > 600 ? 72 : 24),
             getMenuItem(
                 onTap: () {
-//              currentPage.value = WhiteLightPage();
-//              Navigator.of(context).push(CupertinoPageRoute<void>(
-//                  builder: (BuildContext context) => WhiteLightPage()));
                   currentPage.value = WhiteLightPage(key: currentPageKey);
                   innerDrawerKey.currentState.close();
-//              Future.delayed(Duration(milliseconds: 50)).then((value) => );
                 },
                 icon: Image(
                     image: AssetImage('assets/images/white_light.png'),
@@ -226,9 +186,6 @@ class _LeftMenuState extends State<LeftMenu> {
             space(),
             getMenuItem(
                 onTap: () {
-//              currentPage.value = MonoLightPage();
-//              Navigator.of(context).push(CupertinoPageRoute<void>(
-//                  builder: (BuildContext context) => MonoLightPage()));
                   currentPage.value = MonoLightPage(key: currentPageKey);
                   innerDrawerKey.currentState.close();
                 },
@@ -244,10 +201,6 @@ class _LeftMenuState extends State<LeftMenu> {
             space(),
             getMenuItem(
                 onTap: () {
-//              Future.delayed(Duration(milliseconds: 300))
-//                  .then((value) => currentPage.value = AboutPage());
-//              Navigator.of(context).push(CupertinoPageRoute(
-//                  builder: (BuildContext context) => AboutPage()));
                   currentPage.value = InfoPage(key: currentPageKey);
                   innerDrawerKey.currentState.close();
                 },
@@ -259,9 +212,7 @@ class _LeftMenuState extends State<LeftMenu> {
                 text: AppLocalization
                     .of(context)
                     .info),
-
             isSmallScreen ? space(24) : Spacer(),
-//        Spacer(),
             space(MediaQuery
                 .of(context)
                 .size
@@ -269,22 +220,7 @@ class _LeftMenuState extends State<LeftMenu> {
             Padding(
                 padding: const EdgeInsets.only(left: 24.0),
                 child: localizationToggle()),
-//        Row(
-//          crossAxisAlignment: CrossAxisAlignment.center,
-//          children: [
-
-//            SizedBox(width: 48),
-//
-//          ],
-//        ),
-            space(24),
-//        space(MediaQuery.of(context).size.height * 0.08),
-//        if (MediaQuery.of(context).size.height > 600)
-//          Align(
-//              alignment: Alignment.bottomRight,
-//              child: Padding(
-//                  padding: const EdgeInsets.only(right: 16, bottom: 16),
-//                  child: localizationToggle()))
+            space(24)
           ]);
     }
 
