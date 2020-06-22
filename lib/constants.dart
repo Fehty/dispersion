@@ -5,9 +5,6 @@ import 'package:flutter/material.dart';
 //Padding pageTitlePadding =
 //    Padding(padding: const EdgeInsets.only(top: 54, left: 24));
 
-//Для автоматического редактирования файлов для локализации
-///home/fehty/flutter_linux_1.17.1-stable/flutter/bin/flutter pub run intl_translation:generate_from_arb --output-dir=lib/l10n --no-use-deferred-loading lib/l10n/intl_messages.arb lib/l10n/intl_ru.arb lib/l10n/intl_en.arb lib/locale/app_localization.dart
-
 TextStyle leftMenuTextStyle = TextStyle(
     fontSize: 18,
     fontWeight: FontWeight.w400,
